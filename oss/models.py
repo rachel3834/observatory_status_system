@@ -65,15 +65,6 @@ class Telescope(models.Model):
 class InstrumentCapabilities(models.Model):
     def __str__(self):
         return self.descriptor
-    descriptor_options = (
-            ('Imaging', 'Imaging'),
-            ('Long-slit spectroscopy', 'Long-slit spectroscopy'),
-            ('Fiber-fed spectroscopy', 'Fiber-fed spectroscopy'),
-            ('Echelle spectroscopy', 'Echelle spectroscopy'),
-            ('Polarimetry', 'Polarimetry'),
-            ('Interferometry', 'Interferometry'),
-
-    )
     descriptor = models.CharField("Description of capability", max_length=50)
 
 class Instrument(models.Model):
@@ -95,8 +86,8 @@ class Instrument(models.Model):
     name = models.CharField("Instrument Name", max_length=50)
     wavelength = models.CharField("Wavelength range/messenger", max_length=30, choices=wavelength_options,
       default='Optical', null=True, blank=True)
-    capabilities = models.ManyToManyField(InstrumentCapabilities,
-                                null=True, blank=True)
+    capabilities = models.ManyToManyField(InstrumentCapabilities, blank=True)
+    telescope = models.ForeignKey(Telescope, on_delete=models.PROTECT, blank=True, null=True)
 
 class FacilityStatus(models.Model):
     def __str__(self):
