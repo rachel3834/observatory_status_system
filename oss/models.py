@@ -99,8 +99,11 @@ class FacilityStatus(models.Model):
                 ('Closed-daytime', 'Closed - outside operational period'),
                 ('Offline', 'Offline - engineering')
                 )
+    instrument = models.ForeignKey(Instrument, on_delete=models.PROTECT, blank=True, null=True)
+    telescope = models.ForeignKey(Telescope, on_delete=models.PROTECT, blank=True, null=True)
     status = models.CharField("Status", max_length=50)
     status_start = models.DateTimeField('DateTime status begins')
     status_end = models.DateTimeField('DateTime status ends',
                                 null=True, blank=True)
+    comment = models.CharField("Status", max_length=300, blank=True, null=True)
     last_updated = models.DateTimeField('DateTime of last update')

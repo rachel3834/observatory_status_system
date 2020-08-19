@@ -220,12 +220,30 @@ def fetch_lco_instruments():
         ]
 
     return instruments
-    
+
+def get_lco_tel_codes():
+
+    lco_instruments = fetch_lco_instruments()
+    lco_tel_codes = []
+    for instrument in lco_instruments:
+        lco_tel_codes.append(instrument['site_code'])
+
+    return lco_tel_codes
+
 def fetch_lco_telescope_states():
     """Function to query the Las Cumbres Observatory API for a readout of
     the current states of its telescopes"""
 
     url = path.join(API_ROOT, 'telescope_states')
+    response = requests.get(url).json()
+
+    return response
+
+def fetch_lco_telescope_availability():
+    """Function to query the Las Cumbres Observatory API for a readout of
+    the current availability of its telescopes"""
+
+    url = path.join(API_ROOT, 'telescope_availability')
     response = requests.get(url).json()
 
     return response

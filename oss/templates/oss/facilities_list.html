@@ -1,0 +1,17 @@
+{% extends "oss/base.html" %}
+
+{% block page_title %}{{page.name}}{% endblock %}
+{% load facility_data %}
+{% block content %}
+<div style="margin-top: 20px;">
+<center>
+    <h3>Astronomical Observing Facilities</h3>
+    <table border="0">
+        <tr><th>Facility</th><th>Instrument</th><th>Status</th><th>Comment</th></tr>
+        {% for tel in tel_states %}
+            {% telescope_status_entry tel %}
+        {% endfor %}
+    </table>
+</center>
+</div>
+{% endblock %}
