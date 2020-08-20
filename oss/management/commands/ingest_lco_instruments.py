@@ -13,43 +13,26 @@ class Command(BaseCommand):
         operator = FacilityOperator.objects.filter(name='Las Cumbres Observatory')[0]
 
         for instrument in instrument_list:
-
-            qs = Site.objects.filter(site_code=instrument['site_code'])
-            (site, message) = ingest_utils.test_qs_unique_result(qs, [instrument['site_code']])
+            qs = Telescope.objects.filter(tel_code=instrument['tel_code'])
+            (tel, message) = ingest_utils.test_qs_unique_result(qs, [instrument['tel_code']])
 
             if message == 'OK':
-                qs = Installation.objects.filter(name=instrument['installation'],
-                                                                site=site)
-                (installation,message2) = ingest_utils.test_qs_unique_result(qs, [instrument['site_code'],site.name])
+                (new_instrument, stat) = Instrument.objects.get_or_create(name=instrument['name'],
+                                                                  telescope=tel,
+                                                                  wavelength=instrument['wavelength'])
 
-                if message2 == 'OK':
-                    qs = Telescope.objects.filter(name=instrument['telescope'],
-                                                        site=site,
-                                                        installation=installation)
-                                                        
-                    (tel, message3) = ingest_utils.test_qs_unique_result(qs, [instrument['site_code'],site.name, installation.name])
-
-                    if message3 == 'OK':
-                        (new_instrument, stat) = Instrument.objects.get_or_create(name=instrument['name'],
-                                                                          telescope=tel,
-                                                                          wavelength=instrument['wavelength'])
-
-                        for capability in instrument['capabilities']:
-                            qs = InstrumentCapabilities.objects.filter(descriptor=capability)
-                            if len(qs) == 0:
-                                cap = InstrumentCapabilities.create(descriptor=capability)
-                            else:
-                                cap = qs[0]
-
-                            new_instrument.capabilities.add(cap)
-                            new_instrument.save()
-
+                for capability in instrument['capabilities']:
+                    qs = InstrumentCapabilities.objects.filter(descriptor=capability)
+                    if len(qs) == 0:
+                        cap = InstrumentCapabilities.create(descriptor=capability)
                     else:
-                        print(message3)
+                        cap = qs[0]
 
-                else:
-                    print(message2)
+                    new_instrument.capabilities.add(cap)
+                    new_instrument.save()
 
+                print('Ingested instrument '+instrument['name']+' at '+instrument['tel_code'])
+                
             else:
                 print(message)
 

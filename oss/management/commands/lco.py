@@ -155,61 +155,72 @@ def fetch_lco_telescopes():
             {'name': 'Faulkes Telescope South',
             'aperture': 2.0,
             'site_code': 'coj',
-            'installation': 'LCO Clamshell'
+            'installation': 'LCO Clamshell',
+            'tel_code': 'coj.clma.2m0a'
             },
             {'name': '1m0a',
             'aperture': 1.0,
             'site_code': 'coj',
-            'installation': 'LCO Dome A'
+            'installation': 'LCO Dome A',
+            'tel_code': 'coj.doma.1m0a'
             },
             {'name': '1m0a',
             'aperture': 1.0,
             'site_code': 'coj',
-            'installation': 'LCO Dome B'
+            'installation': 'LCO Dome B',
+            'tel_code': 'coj.domb.1m0a'
             },
             {'name': '1m0a',
             'aperture': 1.0,
             'site_code': 'coj',
-            'installation': 'LCO Dome C'
+            'installation': 'LCO Dome C',
+            'tel_code': 'coj.domc.1m0a'
             },
             {'name': '0m4a',
             'aperture': 0.4,
             'site_code': 'coj',
-            'installation': 'LCO Clamshell'
+            'installation': 'LCO Clamshell',
+            'tel_code': 'coj.clma.0m4a'
             },
             {'name': '0m4b',
             'aperture': 0.4,
             'site_code': 'coj',
-            'installation': 'LCO Clamshell'
+            'installation': 'LCO Clamshell',
+            'tel_code': 'coj.clma.0m4b'
             },
 
             # LCO Israel
             {'name': '1m0a',
             'aperture': 1.0,
             'site_code': 'tlv',
-            'installation': 'LCO Dome A'
+            'installation': 'LCO Dome A',
+            'tel_code': 'tlv.doma.1m0a'
             },
 
             # LCO South Africa
             {'name': '1m0a',
             'aperture': 1.0,
             'site_code': 'cpt',
-            'installation': 'LCO Dome A'
+            'installation': 'LCO Dome A',
+            'tel_code': 'cpt.doma.1m0a'
             },
             {'name': '1m0a',
             'aperture': 1.0,
             'site_code': 'cpt',
-            'installation': 'LCO Dome B'
+            'installation': 'LCO Dome B',
+            'tel_code': 'cpt.domb.1m0a'
             },
             {'name': '1m0a',
             'aperture': 1.0,
             'site_code': 'cpt',
-            'installation': 'LCO Dome C'
+            'installation': 'LCO Dome C',
+            'tel_code': 'cpt.domc.1m0a'
             },
             {'name': '0m4a',
             'aperture': 0.4,
             'site_code': 'cpt',
-            'installation': 'LCO Aqawan A'
+            'installation': 'LCO Aqawan A',
+            'tel_code': 'cpt.aqwa.0m4a'
             },
 
 
@@ -217,78 +228,92 @@ def fetch_lco_telescopes():
             {'name': '0m4a',
             'aperture': 0.4,
             'site_code': 'tfn',
-            'installation': 'LCO Aqawan A'
+            'installation': 'LCO Aqawan A',
+            'tel_code': 'tfn.aqwa.0m4a'
             },
             {'name': '0m4b',
             'aperture': 0.4,
             'site_code': 'tfn',
-            'installation': 'LCO Aqawan A'
+            'installation': 'LCO Aqawan A',
+            'tel_code': 'tfn.aqwa.0m4b'
             },
 
             # LCO Chile
             {'name': '1m0a',
             'aperture': 1.0,
             'site_code': 'lsc',
-            'installation': 'LCO Dome A'
+            'installation': 'LCO Dome A',
+            'tel_code': 'lsc.doma.1m0a'
             },
             {'name': '1m0a',
             'aperture': 1.0,
             'site_code': 'lsc',
-            'installation': 'LCO Dome B'
+            'installation': 'LCO Dome B',
+            'tel_code': 'lsc.domb.1m0a'
             },
             {'name': '1m0a',
             'aperture': 1.0,
             'site_code': 'lsc',
-            'installation': 'LCO Dome C'
+            'installation': 'LCO Dome C',
+            'tel_code': 'lsc.domc.1m0a'
             },
             {'name': '0m4a',
             'aperture': 0.4,
             'site_code': 'lsc',
-            'installation': 'LCO Aqawan A'
+            'installation': 'LCO Aqawan A',
+            'tel_code': 'lsc.aqwa.0m4a'
             },
             {'name': '0m4a',
             'aperture': 0.4,
             'site_code': 'lsc',
-            'installation': 'LCO Aqawan B'
+            'installation': 'LCO Aqawan B',
+            'tel_code': 'lsc.aqwb.0m4a'
             },
 
             # LCO Texas
             {'name': '1m0a',
             'aperture': 1.0,
             'site_code': 'elp',
-            'installation': 'LCO Dome A'
+            'installation': 'LCO Dome A',
+            'tel_code': 'elp.doma.1m0a'
             },
             {'name': '1m0a',
             'aperture': 1.0,
             'site_code': 'elp',
-            'installation': 'LCO Dome B'
+            'installation': 'LCO Dome B',
+            'tel_code': 'elp.domb.1m0a'
             },
             {'name': '0m4a',
             'aperture': 0.4,
             'site_code': 'elp',
-            'installation': 'LCO Aqawan A'
+            'installation': 'LCO Aqawan A',
+            'tel_code': 'elp.aqwa.0m4a'
             },
 
             # LCO Hawai'i
             {'name': 'Faulkes Telescope North',
             'aperture': 2.0,
             'site_code': 'ogg',
-            'installation': 'LCO Clamshell'
+            'installation': 'LCO Clamshell',
+            'tel_code': 'ogg.clma.2m0a'
             },
             {'name': '0m4a',
             'aperture': 0.4,
             'site_code': 'ogg',
-            'installation': 'LCO Clamshell'
+            'installation': 'LCO Clamshell',
+            'tel_code': 'ogg.clma.0m4a'
             },
             {'name': '0m4b',
             'aperture': 0.4,
             'site_code': 'ogg',
-            'installation': 'LCO Clamshell'
+            'installation': 'LCO Clamshell',
+            'tel_code': 'ogg.clma.0m4b'
             },
             {'name': '0m4c',
             'aperture': 0.4,
             'site_code': 'ogg',
-            'installation': 'LCO Clamshell'
+            'installation': 'LCO Clamshell',
+            'tel_code': 'ogg.clma.0m4c'
             }
     ]
 
@@ -304,36 +329,42 @@ def fetch_lco_instruments():
         # LCO Australia
         {'name': 'fs01 Spectral',
         'site_code': 'coj',
+        'tel_code': 'coj.clma.2m0a',
         'installation': 'LCO Clamshell',
         'telescope': 'Faulkes Telescope South',
         'wavelength': 'Optical',
         'capabilities': ['Imaging']},
         {'name': 'en12 FLOYDS',
         'site_code': 'coj',
+        'tel_code': 'coj.clma.2m0a',
         'installation': 'LCO Clamshell',
         'telescope': 'Faulkes Telescope South',
         'wavelength': 'Optical',
         'capabilities': ['Long-slit spectroscopy']},
         {'name': 'kb28 SBIG',
         'site_code': 'coj',
+        'tel_code': 'coj.clma.0m4a',
         'installation': 'LCO Clamshell',
         'telescope': '0m4a',
         'wavelength': 'Optical',
         'capabilities': ['Imaging']},
         {'name': 'kb56 SBIG',
         'site_code': 'coj',
+        'tel_code': 'coj.clma.0m4b',
         'installation': 'LCO Clamshell',
         'telescope': '0m4b',
         'wavelength': 'Optical',
         'capabilities': ['Imaging']},
         {'name': 'fa12 Sinistro',
         'site_code': 'coj',
+        'tel_code': 'coj.doma.1m0a',
         'installation': 'LCO Dome A',
         'telescope': '1m0a',
         'wavelength': 'Optical',
         'capabilities': ['Imaging']},
         {'name': 'fa19 Sinistro',
         'site_code': 'coj',
+        'tel_code': 'coj.domb.1m0a',
         'installation': 'LCO Dome B',
         'telescope': '1m0a',
         'wavelength': 'Optical',
@@ -342,6 +373,7 @@ def fetch_lco_instruments():
         # LCO Israel
         {'name': 'NRES-agu-ak13',
         'site_code': 'tlv',
+        'tel_code': 'tlv.doma.1m0a',
         'installation': 'LCO Dome A',
         'telescope': '1m0a',
         'wavelength': 'Optical',
@@ -350,30 +382,35 @@ def fetch_lco_instruments():
         # LCO South Africa
         {'name': 'fa16 Sinistro',
         'site_code': 'cpt',
+        'tel_code': 'cpt.doma.1m0a',
         'installation': 'LCO Dome A',
         'telescope': '1m0a',
         'wavelength': 'Optical',
         'capabilities': ['Imaging']},
         {'name': 'fa14 Sinistro',
         'site_code': 'cpt',
+        'tel_code': 'cpt.domb.1m0a',
         'installation': 'LCO Dome B',
         'telescope': '1m0a',
         'wavelength': 'Optical',
         'capabilities': ['Imaging']},
         {'name': 'NRES',
         'site_code': 'cpt',
+        'tel_code': 'cpt.domb.1m0a',
         'installation': 'LCO Dome B',
         'telescope': '1m0a',
         'wavelength': 'Optical',
         'capabilities': ['Echelle spectroscopy']},
         {'name': 'fa06 Sinistro',
         'site_code': 'cpt',
+        'tel_code': 'cpt.domc.1m0a',
         'installation': 'LCO Dome C',
         'telescope': '1m0a',
         'wavelength': 'Optical',
         'capabilities': ['Imaging']},
         {'name': 'kb84 SBIG',
         'site_code': 'cpt',
+        'tel_code': 'cpt.aqwa.0m4a',
         'installation': 'LCO Aqawan A',
         'telescope': '0m4a',
         'wavelength': 'Optical',
@@ -382,12 +419,14 @@ def fetch_lco_instruments():
         # LCO Tenerife
         {'name': 'kb81 SBIG',
         'site_code': 'tfn',
+        'tel_code': 'tfn.aqwa.0m4a',
         'installation': 'LCO Aqawan A',
         'telescope': '0m4a',
         'wavelength': 'Optical',
         'capabilities': ['Imaging']},
         {'name': 'kb98 SBIG',
         'site_code': 'tfn',
+        'tel_code': 'tfn.aqwa.0m4b',
         'installation': 'LCO Aqawan A',
         'telescope': '0m4b',
         'wavelength': 'Optical',
@@ -396,36 +435,42 @@ def fetch_lco_instruments():
         # LCO Chile
         {'name': 'fa15 Sinistro',
         'site_code': 'lsc',
+        'tel_code': 'lsc.doma.1m0a',
         'installation': 'LCO Dome A',
         'telescope': '1m0a',
         'wavelength': 'Optical',
         'capabilities': ['Imaging']},
         {'name': 'fa04 Sinistro',
         'site_code': 'lsc',
+        'tel_code': 'lsc.domb.1m0a',
         'installation': 'LCO Dome B',
         'telescope': '1m0a',
         'wavelength': 'Optical',
         'capabilities': ['Imaging']},
         {'name': 'NRES',
         'site_code': 'lsc',
+        'tel_code': 'lsc.domb.1m0a',
         'installation': 'LCO Dome B',
         'telescope': '1m0a',
         'wavelength': 'Optical',
         'capabilities': ['Echelle spectroscopy']},
         {'name': 'fa03 Sinistro',
         'site_code': 'lsc',
+        'tel_code': 'lsc.domc.1m0a',
         'installation': 'LCO Dome C',
         'telescope': '1m0a',
         'wavelength': 'Optical',
         'capabilities': ['Imaging']},
         {'name': 'kb29 SBIG',
         'site_code': 'lsc',
+        'tel_code': 'lsc.aqwa.0m4a',
         'installation': 'LCO Aqawan A',
         'telescope': '0m4a',
         'wavelength': 'Optical',
         'capabilities': ['Imaging']},
         {'name': 'kb26 SBIG',
         'site_code': 'lsc',
+        'tel_code': 'lsc.aqwb.0m4a',
         'installation': 'LCO Aqawan B',
         'telescope': '0m4a',
         'wavelength': 'Optical',
@@ -434,18 +479,21 @@ def fetch_lco_instruments():
         # LCO Texas
         {'name': 'fa05 Sinistro',
         'site_code': 'elp',
+        'tel_code': 'elp.doma.1m0a',
         'installation': 'LCO Dome A',
         'telescope': '1m0a',
         'wavelength': 'Optical',
         'capabilities': ['Imaging']},
         {'name': 'fa07 Sinistro',
         'site_code': 'elp',
+        'tel_code': 'elp.domb.1m0a',
         'installation': 'LCO Dome B',
         'telescope': '1m0a',
         'wavelength': 'Optical',
         'capabilities': ['Imaging']},
         {'name': 'kb92 SBIG',
         'site_code': 'elp',
+        'tel_code': 'elp.aqwa.0m4a',
         'installation': 'LCO Aqawan A',
         'telescope': '0m4a',
         'wavelength': 'Optical',
@@ -454,24 +502,28 @@ def fetch_lco_instruments():
         # LCO Hawai'i
         {'name': 'fs02 Spectral',
         'site_code': 'ogg',
+        'tel_code': 'ogg.clma.2m0a',
         'installation': 'LCO Clamshell',
         'telescope': 'Faulkes Telescope North',
         'wavelength': 'Optical',
         'capabilities': ['Imaging']},
         {'name': 'en06 FLOYDS',
         'site_code': 'ogg',
+        'tel_code': 'ogg.clma.2m0a',
         'installation': 'LCO Clamshell',
         'telescope': 'Faulkes Telescope North',
         'wavelength': 'Optical',
         'capabilities': ['Long-slit spectroscopy']},
         {'name': 'kb27 SBIG',
         'site_code': 'ogg',
+        'tel_code': 'ogg.clma.0m4b',
         'installation': 'LCO Clamshell',
         'telescope': '0m4b',
         'wavelength': 'Optical',
         'capabilities': ['Imaging']},
         {'name': 'kb82 SBIG',
         'site_code': 'ogg',
+        'tel_code': 'ogg.clma.0m4c',
         'installation': 'LCO Clamshell',
         'telescope': '0m4c',
         'wavelength': 'Optical',
@@ -485,7 +537,7 @@ def get_lco_tel_codes():
     lco_instruments = fetch_lco_instruments()
     lco_tel_codes = []
     for instrument in lco_instruments:
-        lco_tel_codes.append(instrument['site_code'])
+        lco_tel_codes.append(instrument['tel_code'])
 
     return lco_tel_codes
 

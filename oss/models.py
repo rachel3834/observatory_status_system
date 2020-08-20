@@ -58,6 +58,7 @@ class Telescope(models.Model):
         return self.name+' '+self.installation.name+' '+self.site.name
 
     name = models.CharField("Telescope Name", max_length=50)
+    tel_code = models.CharField("Telescope code", max_length=50, null=True, blank=True)
     aperture = models.DecimalField("Telescope Effective Aperture (m)", max_digits=6,
                                   decimal_places=2, null=True, blank=True)
     operator = models.ForeignKey(FacilityOperator, on_delete=models.PROTECT)
@@ -93,7 +94,10 @@ class Instrument(models.Model):
 
 class FacilityStatus(models.Model):
     def __str__(self):
-        return self.status
+        try:
+            self.instrument.name+' '+self.status
+        except AttributeError:
+            return self.telescope.tel_code+' '+self.status
 
     states = (
                 ('Open', 'Open'),

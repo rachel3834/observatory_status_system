@@ -22,6 +22,7 @@ class Command(BaseCommand):
 
                 if message2 == 'OK':
                     (new_tel, ingested) = Telescope.objects.get_or_create(name=tel['name'],
+                                                          tel_code=tel['tel_code'],
                                                           aperture=tel['aperture'],
                                                           operator=operator,
                                                           site=site,

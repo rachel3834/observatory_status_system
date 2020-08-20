@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from oss.models import Telescope, FacilityStatus
-from oss.management.commands import lco
+from oss.management.commands import lco, ingest_utils
 from dateutil.parser import parse as date_parser
 from datetime import datetime
 import pytz
@@ -44,16 +44,13 @@ class Command(BaseCommand):
                 print('No status information available for '+tel.name+' recording as offline')
 
     def get_lco_telescope(self, tel_code):
-        qs = Telescope.objects.filter(name=tel_code)
+        qs = Telescope.objects.filter(tel_code=tel_code)
+        (tel,message) = ingest_utils.test_qs_unique_result(qs, [tel_code])
 
-        if len(qs) == 1:
-            tel = qs[0]
-        elif len(qs) == 0:
-            raise IOError('Unrecognised site code indicated: '+tel_code)
-        elif len(qs) > 1:
-            raise IOError('Ambiguous site code indicated: '+tel_code)
-
-        return tel
+        if message == 'OK':
+            return tel
+        else:
+            raise IOError(message)
 
     def parse_status_data(self, params):
 
@@ -63,7 +60,7 @@ class Command(BaseCommand):
         #status['ts_start'] = status['ts_start'].replace(tzinfo=pytz.UTC)
         status['ts_end'] = date_parser(params['end'])
         #status['ts_end'] = status['ts_end'].replace(tzinfo=pytz.UTC)
-
+        
         if params['event_type'] == 'AVAILABLE':
             status['state'] = 'Open'
         elif params['event_type'] == 'NOT_OK_TO_OPEN' and \
@@ -74,6 +71,8 @@ class Command(BaseCommand):
                 status['state'] = 'Offline'
             elif 'WEATHER' in params['event_reason']:
                 status['state'] = 'Closed-weather'
+        elif params['event_type'] == 'SEQUENCER_DISABLED':
+            status['state'] = 'Offline'
 
         return status
 
