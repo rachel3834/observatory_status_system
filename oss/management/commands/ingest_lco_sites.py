@@ -11,13 +11,14 @@ class Command(BaseCommand):
         sites_list = lco.fetch_lco_sites()
 
         for site in sites_list:
-            new_site = Site.objects.get_or_create(name=site['name'],
+            (new_site, stat) = Site.objects.get_or_create(name=site['name'],
                                                   location=site['location'],
                                                   latitude=site['latitude'],
                                                   longitude=site['longitude'],
-                                                  altitude=site['altitude'])
+                                                  altitude=site['altitude'],
+                                                  site_code=site['site_code'])
 
-            print('Created site '+repr(site))
+            print('Created site '+repr(new_site))
 
     def handle(self,*args, **options):
         self._ingest_sites()

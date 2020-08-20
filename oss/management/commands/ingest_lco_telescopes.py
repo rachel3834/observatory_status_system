@@ -1,39 +1,38 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from oss.models import Site, Installation, Telescope, FacilityOperator
-from oss.management.commands import lco
+from oss.management.commands import lco, ingest_utils
 
 class Command(BaseCommand):
     args = ''
     help = ''
 
     def _ingest_telescopes(self):
-        instrument_list = lco.fetch_lco_instruments()
+        tel_list = lco.fetch_lco_telescopes()
         operator = FacilityOperator.objects.filter(name='Las Cumbres Observatory')[0]
 
-        for instrument in instrument_list:
+        for tel in tel_list:
+            qs = Site.objects.filter(site_code=tel['site_code'])
+            (site, message) = ingest_utils.test_qs_unique_result(qs, [tel['site_code']])
 
-            (site_id, enclosure, tel_id) = instrument['site_code'].split('.')
-            site_name = lco.parse_site_code(site_id)
-            qs = Site.objects.filter(name=site_name)
+            if message == 'OK':
+                qs = Installation.objects.filter(name=tel['installation'],
+                                                            site=site)
+                (installation,message2) = ingest_utils.test_qs_unique_result(qs, [tel['site_code'],site.name])
 
-            if len(qs) == 1:
-                (new_dome,ingested) = Installation.objects.get_or_create(name='lco_'+site_id+'_'+enclosure,
-                                                            type='Dome', site=qs[0])
-                print('Ingested installation '+'lco_'+site_id+'_'+enclosure+' type=Dome site='+repr(qs[0]))
-
-                aperture = lco.parse_aperture_from_telid(tel_id)
-                (new_tel, ingested) = Telescope.objects.get_or_create(name=instrument['site_code'],
-                                                          aperture=aperture,
+                if message2 == 'OK':
+                    (new_tel, ingested) = Telescope.objects.get_or_create(name=tel['name'],
+                                                          aperture=tel['aperture'],
                                                           operator=operator,
-                                                          site=qs[0],
-                                                          installation=new_dome)
-                print('Ingested new telescope '+new_tel.name)
+                                                          site=site,
+                                                          installation=installation)
+                    print('Ingested telescope '+tel['name']+' at '+site.name)
 
-            elif len(qs) == 0:
-                raise IOError('Unrecognised site code indicated: '+site_code+' '+site_name)
-            elif len(qs) > 1:
-                raise IOError('Ambiguous site code indicated: '+site_code+' '+site_name)
+                else:
+                    print(message2)
+
+            else:
+                print(message)
 
     def handle(self,*args, **options):
         self._ingest_telescopes()

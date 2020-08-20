@@ -35,10 +35,11 @@ class Site(models.Model):
                                     decimal_places=4, null=True, blank=True)
     orbit = models.CharField("Orbit", max_length=30, choices=orbit_options,
                             null=True, blank=True)
+    site_code = models.CharField("Site code", max_length=10, null=True, blank=True)
 
 class Installation(models.Model):
     def __str__(self):
-        return self.name
+        return self.name+' '+self.site.name
     installation_options = (
         ('Dome', 'Dome'),
         ('Dish', 'Dish'),
@@ -50,10 +51,11 @@ class Installation(models.Model):
     type = models.CharField("Type", max_length=30, choices=installation_options,
                             default='Dome', null=True, blank=True)
     site = models.ForeignKey(Site, on_delete=models.PROTECT)
+    operator = models.ForeignKey(FacilityOperator, on_delete=models.PROTECT, null=True)
 
 class Telescope(models.Model):
     def __str__(self):
-        return self.name
+        return self.name+' '+self.installation.name+' '+self.site.name
 
     name = models.CharField("Telescope Name", max_length=50)
     aperture = models.DecimalField("Telescope Effective Aperture (m)", max_digits=6,
@@ -69,7 +71,7 @@ class InstrumentCapabilities(models.Model):
 
 class Instrument(models.Model):
     def __str__(self):
-        return self.name
+        return self.name+' '+self.telescope.name+' '+self.telescope.site.name
 
     wavelength_options = (
           ('Optical', 'Optical'),
@@ -99,8 +101,8 @@ class FacilityStatus(models.Model):
                 ('Closed-daytime', 'Closed - outside operational period'),
                 ('Offline', 'Offline - engineering')
                 )
-    instrument = models.ForeignKey(Instrument, on_delete=models.PROTECT, blank=True, null=True)
-    telescope = models.ForeignKey(Telescope, on_delete=models.PROTECT, blank=True, null=True)
+    instrument = models.ForeignKey(Instrument, on_delete=models.CASCADE, blank=True, null=True)
+    telescope = models.ForeignKey(Telescope, on_delete=models.CASCADE, blank=True, null=True)
     status = models.CharField("Status", max_length=50)
     status_start = models.DateTimeField('DateTime status begins')
     status_end = models.DateTimeField('DateTime status ends',

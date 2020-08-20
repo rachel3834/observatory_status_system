@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from oss.models import Site, Installation, Telescope, FacilityOperator
 from oss.models import Instrument, InstrumentCapabilities
-from oss.management.commands import lco
+from oss.management.commands import lco, ingest_utils
 
 class Command(BaseCommand):
     args = ''
@@ -14,41 +14,45 @@ class Command(BaseCommand):
 
         for instrument in instrument_list:
 
-            (site_code, enclosure, tel_id) = instrument['site_code'].split('.')
-            site_name = lco.parse_site_code(site_code)
-            qs = Site.objects.filter(name=site_name)
+            qs = Site.objects.filter(site_code=instrument['site_code'])
+            (site, message) = ingest_utils.test_qs_unique_result(qs, [instrument['site_code']])
 
-            if len(qs) == 1:
-                site = qs[0]
+            if message == 'OK':
+                qs = Installation.objects.filter(name=instrument['installation'],
+                                                                site=site)
+                (installation,message2) = ingest_utils.test_qs_unique_result(qs, [instrument['site_code'],site.name])
 
-                qs = Telescope.objects.filter(name=instrument['site_code'])
+                if message2 == 'OK':
+                    qs = Telescope.objects.filter(name=instrument['telescope'],
+                                                        site=site,
+                                                        installation=installation)
+                                                        
+                    (tel, message3) = ingest_utils.test_qs_unique_result(qs, [instrument['site_code'],site.name, installation.name])
 
-                if len(qs) == 1:
-                    tel = qs[0]
-                    (new_instrument, ingested) = Instrument.objects.get_or_create(name=instrument['name'],
-                                                            wavelength=instrument['wavelength'],
-                                                            telescope=tel)
+                    if message3 == 'OK':
+                        (new_instrument, stat) = Instrument.objects.get_or_create(name=instrument['name'],
+                                                                          telescope=tel,
+                                                                          wavelength=instrument['wavelength'])
 
-                    for capability in instrument['capabilities']:
-                        qs = InstrumentCapabilities.objects.filter(descriptor=capability)
-                        if len(qs) == 1:
-                            new_instrument.capabilities.add(qs[0])
-                        elif len(qs) > 1:
-                            raise IOError('Ambiguous instrument capability '+capability)
-                        elif len(qs) == 0:
-                            raise IOError('Unrecognised instrument capability '+capability)
+                        for capability in instrument['capabilities']:
+                            qs = InstrumentCapabilities.objects.filter(descriptor=capability)
+                            if len(qs) == 0:
+                                cap = InstrumentCapabilities.create(descriptor=capability)
+                            else:
+                                cap = qs[0]
 
-                    print('Ingested new telescope '+new_instrument.name)
-                    
-                elif len(qs) == 0:
-                    raise IOError('Unrecognised telescope code indicated: '+instrument['site_code'])
-                elif len(qs) > 1:
-                    raise IOError('Ambiguous telescope code indicated: '+instrument['site_code'])
+                            new_instrument.capabilities.add(cap)
+                            new_instrument.save()
 
-            elif len(qs) == 0:
-                raise IOError('Unrecognised site code indicated: '+site_code+' '+site_name)
-            elif len(qs) > 1:
-                raise IOError('Ambiguous site code indicated: '+site_code+' '+site_name)
+                    else:
+                        print(message3)
+
+                else:
+                    print(message2)
+
+            else:
+                print(message)
+
 
     def handle(self,*args, **options):
         self._ingest_telescopes()
