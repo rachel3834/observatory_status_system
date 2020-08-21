@@ -1,5 +1,4 @@
 <tr style="background-color:{{tel_bgcolor}}; color:{{tel_fontcolor}}">
-  <td></td>
   <td>{{tel_status.name}}</td>
   <td></td>
   <td>{{tel_status.status}}</td>
@@ -7,7 +6,7 @@
 </tr>
   {% for instrument in tel_status.instruments %}
     <tr>
-      <td></td><td></td><td>{{instrument.0}}</td>
+      <td></td><td>{{instrument.0}}</td>
       <td style="background-color:{{instrument.3}}; color:{{instrument.4}}">{{instrument.1}}</td>
       <td style="background-color:{{instrument.3}}; color:{{instrument.4}}">{{instrument.2}}</td>
     </tr>

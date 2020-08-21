@@ -1,0 +1,50 @@
+{% extends "oss/base.html" %}
+
+{% block page_title %}{{page.name}}{% endblock %}
+{% load facility_data %}
+{% block content %}
+
+<div style="margin-top: 20px;">
+
+  <div class="row">
+
+    <div class="col-md-4">
+      <div id="site-info">
+        <table class="table">
+          <tr><th>Location</th><td>{{object.location}}</td></tr>
+          <tr><th>Latitude</th><td>{{object.latitude}} &deg;</td></tr>
+          <tr><th>Longitude</th><td>{{object.longitude}} &deg;</td></tr>
+          <tr><th>Altitude</th><td>{{object.altitude}} m</td></tr>
+          {% if object.location == 'Space' %}
+            <tr><th>Orbit</th><td>{{object.orbit}}</td></tr>
+          {% endif %}
+          <tr><th>Site code</th><td>{{object.site_code}}</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <h3>Facilities located at {{site.name}}</h3>
+      {% if tel_states|length > 0 %}
+        <table class="table table-bordered">
+          <caption>Status of astronomical observing facilities located at {{site.name}}</caption>
+          <thead class="thead-dark">
+            <tr><th style="font-size:18px">Facility</th>
+                <th style="font-size:18px">Instrument</th>
+                <th style="font-size:18px">Status</th>
+                <th style="font-size:18px">Comment</th></tr>
+          </thead>
+          {% for tel_status in tel_states %}
+            {% telescope_site_entry tel_status %}
+          {% endfor %}
+        </table>
+      {% else %}
+        <p>No telescope list available for this site</p>
+      {% endif %}
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}

@@ -102,8 +102,10 @@ class FacilityStatus(models.Model):
     states = (
                 ('Open', 'Open'),
                 ('Closed-weather', 'Closed - weather'),
+                ('Closed-unsafe-to-observe', 'Closed - site conditions unsafe for observations'),
                 ('Closed-daytime', 'Closed - outside operational period'),
-                ('Offline', 'Offline - engineering')
+                ('Offline', 'Offline - engineering'),
+                ('Unknown', 'Unknown or unrecognised status')
                 )
     instrument = models.ForeignKey(Instrument, on_delete=models.CASCADE, blank=True, null=True)
     telescope = models.ForeignKey(Telescope, on_delete=models.CASCADE, blank=True, null=True)

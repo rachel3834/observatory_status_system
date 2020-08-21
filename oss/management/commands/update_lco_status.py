@@ -60,19 +60,25 @@ class Command(BaseCommand):
         #status['ts_start'] = status['ts_start'].replace(tzinfo=pytz.UTC)
         status['ts_end'] = date_parser(params['end'])
         #status['ts_end'] = status['ts_end'].replace(tzinfo=pytz.UTC)
-        
+
         if params['event_type'] == 'AVAILABLE':
             status['state'] = 'Open'
         elif params['event_type'] == 'NOT_OK_TO_OPEN' and \
             'Weather' in params['event_reason']:
             status['state'] = 'Closed-weather'
+        elif params['event_type'] == 'NOT_OK_TO_OPEN' and \
+            'Weather' not in params['event_reason']:
+            status['state'] = 'Closed-unsafe-to-observe'
         elif params['event_type'] == 'ENCLOSURE_INTERLOCK':
-            if 'ENCLOSURE_FLAPPING' in params['event_reason']:
-                status['state'] = 'Offline'
-            elif 'WEATHER' in params['event_reason']:
+            if 'WEATHER' in params['event_reason']:
                 status['state'] = 'Closed-weather'
-        elif params['event_type'] == 'SEQUENCER_DISABLED':
+            else:
+                status['state'] = 'Offline'
+        elif params['event_type'] in ['SEQUENCER_DISABLED', 'SITE_AGENT_UNRESPONSIVE',\
+                                        'ENCLOSURE_DISABLED', 'NOT_AVAILABLE']:
             status['state'] = 'Offline'
+        else:
+            status['state'] = 'Unknown'
 
         return status
 

@@ -5,11 +5,21 @@
 {% block content %}
 <div style="margin-top: 20px;">
 <center>
-    <h3>Astronomical Observing Facilities</h3>
-    <table border="0">
-        <tr><th>Facility</th><th>Instrument</th><th>Status</th><th>Comment</th></tr>
-        {% for tel in tel_states %}
-            {% telescope_status_entry tel %}
+    <h3>Astronomical Observing Facility Status</h3>
+    <table class="table table-bordered">
+      <caption>Status of astronomical observing facilities</caption>
+      <thead class="thead-dark">
+        <tr><th style="font-size:18px">Site</th>
+            <th style="font-size:18px">Facility</th>
+            <th style="font-size:18px">Instrument</th>
+            <th style="font-size:18px">Status</th>
+            <th style="font-size:18px">Comment</th></tr>
+      </thead>
+        {% for site_name, site_id, site_status in site_states %}
+          <tr><td><h5><a href="{% url 'site_summary' pk=site_id %}">{{site_name}}</a></h5></td><td></td><td></td><td></td><td></td></tr>
+            {% for tel_status in site_status %}
+              {% telescope_status_entry tel_status %}
+            {% endfor %}
         {% endfor %}
     </table>
 </center>
