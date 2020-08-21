@@ -85,8 +85,27 @@ class SiteDetailView(DetailView):
     template_name = 'oss/site_summary.html'
     model = Site
 
+    ## Possible upgrade: embed google map showing site location
+
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['tel_list'] = Telescope.objects.filter(site=self.object)
         context['tel_states'] = get_status_for_telescopes(self.object, context['tel_list'])
         return context
+
+### TODO:
+## Add content of other observatorys
+# -> Add parameter URL for homepage
+# TelescopeDetailView
+# -> Summary of parameters plus timeline of status
+# InstrumentDetailView
+# -> Summary of parameters plus timeline of status
+## -> Cross-links to instrument and telescope detail views
+# SetTelescopeStatusView
+# SetInstrumentStatusView
+# -> Corresponding tool to submit data to these APIs
+# Online form views for these
+# GetTelescopeStatusView
+# GetInstrumentStatusView
+# Management commands to fetch status of other facilities
+# Add an about page, with documentation on where to find more information
