@@ -1,14 +1,14 @@
 <tr style="background-color:{{tel_bgcolor}}; color:{{tel_fontcolor}}">
   <td></td>
-  <td>{{tel_status.name}}</td>
+  <td><a href="{% url 'telescope_summary' pk=tel_status.telescope.pk %}">{{tel_status.name}}</a></td>
   <td></td>
   <td>{{tel_status.status}}</td>
   <td>{{tel_status.comment}}</td>
 </tr>
   {% for instrument in tel_status.instruments %}
     <tr>
-      <td></td><td></td><td>{{instrument.0}}</td>
-      <td style="background-color:{{instrument.3}}; color:{{instrument.4}}">{{instrument.1}}</td>
-      <td style="background-color:{{instrument.3}}; color:{{instrument.4}}">{{instrument.2}}</td>
+      <td></td><td></td><td><a href="{% url 'instrument_summary' pk=instrument.3 %}">{{instrument.0}}</a></td>
+      <td style="background-color:{{instrument.4}}; color:{{instrument.5}}">{{instrument.1}}</td>
+      <td style="background-color:{{instrument.4}}; color:{{instrument.5}}">{{instrument.2}}</td>
     </tr>
   {% endfor %}

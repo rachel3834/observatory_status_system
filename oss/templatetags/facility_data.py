@@ -23,8 +23,9 @@ def color_code_telescope_status(tel_status):
     for instrument in tel_status.instruments:
         bg = STATUS_MAP[instrument[1]]['bgcolor']
         font = STATUS_MAP[instrument[1]]['fontcolor']
-        instruments.append( list(instruments) + [bg, font] )
+        instruments.append( list(instrument) + [bg, font] )
 
+    #print(instruments)
     return {'tel_status': tel_status,
             'tel_bgcolor': tel_bgcolor, 'tel_fontcolor': tel_fontcolor,
             'instruments': instruments}
@@ -47,4 +48,5 @@ def telescope_site_entry(tel_status):
     the list of facilities at a single site
     """
     context = color_code_telescope_status(tel_status)
+    context['tel_id'] = tel_status.telescope.pk
     return context

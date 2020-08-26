@@ -16,7 +16,8 @@ class Command(BaseCommand):
                                                   latitude=site['latitude'],
                                                   longitude=site['longitude'],
                                                   altitude=site['altitude'],
-                                                  site_code=site['site_code'])
+                                                  site_code=site['site_code'],
+                                                  url=site['url'])
 
             print('Created site '+repr(new_site))
 

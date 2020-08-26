@@ -8,6 +8,7 @@ class FacilityOperator(models.Model):
     name = models.CharField("Operator Name", max_length=50)
     email = models.EmailField("Email")
     institution = models.CharField("Institution", max_length=50)
+    url = models.URLField(max_length=200, null=True, blank=True)
 
 class Site(models.Model):
     def __str__(self):
@@ -36,6 +37,7 @@ class Site(models.Model):
     orbit = models.CharField("Orbit", max_length=30, choices=orbit_options,
                             null=True, blank=True)
     site_code = models.CharField("Site code", max_length=10, null=True, blank=True)
+    url = models.URLField(max_length=200, null=True, blank=True)
 
 class Installation(models.Model):
     def __str__(self):
@@ -64,6 +66,7 @@ class Telescope(models.Model):
     operator = models.ForeignKey(FacilityOperator, on_delete=models.PROTECT)
     site = models.ForeignKey(Site, on_delete=models.PROTECT)
     installation = models.ForeignKey(Installation, on_delete=models.PROTECT)
+    url = models.URLField(max_length=200, null=True, blank=True)
 
 class InstrumentCapabilities(models.Model):
     def __str__(self):
@@ -91,6 +94,7 @@ class Instrument(models.Model):
       default='Optical', null=True, blank=True)
     capabilities = models.ManyToManyField(InstrumentCapabilities, blank=True)
     telescope = models.ForeignKey(Telescope, on_delete=models.PROTECT, blank=True, null=True)
+    url = models.URLField(max_length=200, null=True, blank=True)
 
 class FacilityStatus(models.Model):
     def __str__(self):

@@ -26,7 +26,8 @@ class Command(BaseCommand):
                                                           aperture=tel['aperture'],
                                                           operator=operator,
                                                           site=site,
-                                                          installation=installation)
+                                                          installation=installation,
+                                                          url=tel['url'])
                     print('Ingested telescope '+tel['name']+' at '+site.name)
 
                 else:

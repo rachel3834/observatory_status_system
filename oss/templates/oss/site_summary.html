@@ -19,6 +19,9 @@
             <tr><th>Orbit</th><td>{{object.orbit}}</td></tr>
           {% endif %}
           <tr><th>Site code</th><td>{{object.site_code}}</td></tr>
+          {% if object.url|length > 0 %}
+            <tr><th>Website</th><td><a href="{{object.url}}">{{object.url}}</a></td></tr>
+          {% endif %}
         </table>
       </div>
     </div>

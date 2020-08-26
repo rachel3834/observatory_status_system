@@ -19,7 +19,8 @@ class Command(BaseCommand):
             if message == 'OK':
                 (new_instrument, stat) = Instrument.objects.get_or_create(name=instrument['name'],
                                                                   telescope=tel,
-                                                                  wavelength=instrument['wavelength'])
+                                                                  wavelength=instrument['wavelength'],
+                                                                  url=instrument['url'])
 
                 for capability in instrument['capabilities']:
                     qs = InstrumentCapabilities.objects.filter(descriptor=capability)
@@ -32,7 +33,7 @@ class Command(BaseCommand):
                     new_instrument.save()
 
                 print('Ingested instrument '+instrument['name']+' at '+instrument['tel_code'])
-                
+
             else:
                 print(message)
 

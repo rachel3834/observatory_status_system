@@ -10,6 +10,7 @@ class TelescopeStatus():
     def __init__(self):
         self.name = None
         self.site = None
+        self.telescope = None
         self.status = None
         self.comment = None
         self.instruments = []
@@ -54,6 +55,7 @@ def get_status_for_telescopes(site, telescopes):
             tel_stat = TelescopeStatus()
             tel_stat.name = tel.installation.name+' '+tel.name
             tel_stat.site = tel.site.name
+            tel_stat.telescope = tel
             tel_names.append(tel.name)
 
             instruments = Instrument.objects.filter(telescope=tel)
@@ -71,9 +73,9 @@ def get_status_for_telescopes(site, telescopes):
                 for detector in instruments:
                     try:
                         status = FacilityStatus.objects.filter(instrument=detector).latest('last_updated')
-                        tel_stat.instruments.append( (detector.name, status.status, status.comment) )
+                        tel_stat.instruments.append( (detector.name, status.status, status.comment, detector.pk) )
                     except FacilityStatus.DoesNotExist:
-                        tel_stat.instruments.append( (detector.name, 'Unknown', '') )
+                        tel_stat.instruments.append( (detector.name, 'Unknown', '', detector.pk) )
 
             tel_states.append(tel_stat)
 
@@ -93,14 +95,52 @@ class SiteDetailView(DetailView):
         context['tel_states'] = get_status_for_telescopes(self.object, context['tel_list'])
         return context
 
+class TelescopeDetailView(DetailView):
+    template_name = 'oss/telescope_summary.html'
+    model = Telescope
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['site'] = Site.objects.get(telescope=self.object)
+        context['installation'] = Installation.objects.get(telescope=self.object)
+        instruments = Instrument.objects.filter(telescope=self.object)
+        instrument_list = []
+        for instrument in instruments:
+            capabilities = InstrumentCapabilities.objects.filter(instrument=instrument)
+            description = ''
+            for cap in capabilities:
+                if len(description) > 0:
+                    description += ', '+cap.descriptor
+                else:
+                    description += cap.descriptor
+            instrument_list.append( (instrument, description) )
+        context['instrument_list'] = instrument_list
+        context['tel_states'] = get_status_for_telescopes(self.object, [self.object])
+        return context
+
+class InstrumentDetailView(DetailView):
+    template_name = 'oss/instrument_summary.html'
+    model = Instrument
+
+    ## Possible upgrade: embed google map showing site location
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['telescope'] = self.object.telescope
+        capabilities = InstrumentCapabilities.objects.filter(instrument=self.object)
+        description = ''
+        for cap in capabilities:
+            if len(description) > 0:
+                description += ', '+cap.descriptor
+            else:
+                description += cap.descriptor
+        context['description'] = description
+        return context
+
 ### TODO:
 ## Add content of other observatorys
-# -> Add parameter URL for homepage
-# TelescopeDetailView
+# TelescopeDetailView & InstrumentDetailView
 # -> Summary of parameters plus timeline of status
-# InstrumentDetailView
-# -> Summary of parameters plus timeline of status
-## -> Cross-links to instrument and telescope detail views
 # SetTelescopeStatusView
 # SetInstrumentStatusView
 # -> Corresponding tool to submit data to these APIs

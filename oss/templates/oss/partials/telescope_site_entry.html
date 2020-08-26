@@ -1,5 +1,5 @@
 <tr style="background-color:{{tel_bgcolor}}; color:{{tel_fontcolor}}">
-  <td>{{tel_status.name}}</td>
+  <td><a href="{% url 'telescope_summary' pk=tel_id %}">{{tel_status.name}}</a></td>
   <td></td>
   <td>{{tel_status.status}}</td>
   <td>{{tel_status.comment}}</td>

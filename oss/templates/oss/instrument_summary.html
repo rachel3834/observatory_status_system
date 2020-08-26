@@ -1,0 +1,32 @@
+{% extends "oss/base.html" %}
+
+{% block page_title %}{{page.name}}{% endblock %}
+{% load facility_data %}
+{% block content %}
+
+<div style="margin-top: 20px;">
+
+  <div class="row">
+
+    <div class="col-md-4">
+      <div id="site-info">
+        <table class="table">
+          <tr><th>Telescope</th><td><a href="{% url 'telescope_summary' pk=telescope.pk %}">{{telescope.name}}</a></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <h3>{{object.name}}</h3>
+        <table class="table">
+          <tr><th>Wavelength range</th><td>{{object.wavelength}}</td></tr>
+          <tr><th>Capabilities</th><td>{{description}}</td></tr>
+          <tr><th>Website</th><td><a href="{{object.url}}">{{object.url}}</a></td></tr>
+        </table>
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}
