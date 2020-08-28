@@ -5,6 +5,9 @@ from django_filters.views import FilterView
 from django.views.generic.detail import DetailView
 from oss.models import FacilityOperator, Site, Installation, Telescope
 from oss.models import InstrumentCapabilities, Instrument, FacilityStatus
+from rest_framework import viewsets
+from rest_framework import permissions
+from oss.serializers import TelescopeSerializer
 
 class TelescopeStatus():
     def __init__(self):
@@ -136,6 +139,13 @@ class InstrumentDetailView(DetailView):
                 description += cap.descriptor
         context['description'] = description
         return context
+
+class GetTelescopeCurrentStatusView(viewsets.ModelViewSet):
+    """Class to return the status of a Telescope"""
+    queryset = Telescope.objects.all().order_by('name')
+    serializer_class = TelescopeSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
 
 ### TODO:
 ## Add content of other observatorys
