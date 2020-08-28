@@ -8,6 +8,8 @@ from oss.models import InstrumentCapabilities, Instrument, FacilityStatus
 from rest_framework import viewsets
 from rest_framework import permissions
 from oss.serializers import TelescopeSerializer
+from datetime import datetime, timedelta
+import pytz
 
 class TelescopeStatus():
     def __init__(self):
@@ -17,6 +19,7 @@ class TelescopeStatus():
         self.status = None
         self.comment = None
         self.instruments = []
+        self.timeline = []
 
 class FacilityListView(FilterView):
     template_name = 'oss/facilities_list.html'
@@ -38,7 +41,7 @@ class FacilityListView(FilterView):
             site_names.append(site.name)
             site_ids.append(site.pk)
 
-            tel_states = get_status_for_telescopes(site, telescopes)
+            tel_states = get_current_status_for_telescopes(site, telescopes)
 
             site_status.append( tel_states )
 
@@ -48,7 +51,7 @@ class FacilityListView(FilterView):
 
         return context
 
-def get_status_for_telescopes(site, telescopes):
+def get_current_status_for_telescopes(site, telescopes):
     tel_names = []
     tel_states = []
 
@@ -86,6 +89,29 @@ def get_status_for_telescopes(site, telescopes):
 
     return telescope_states
 
+def get_status_timeline_for_telescope(telescope):
+
+    tel_status = get_current_status_for_telescopes(telescope.site, [telescope])[0]
+
+    qs = FacilityStatus.objects.filter(telescope=telescope).order_by('status_start')
+
+    dt = timedelta(days=1.0)
+
+    timeline = []
+    for entry in qs:
+        if entry.status_end:
+            ndays = entry.status_end - entry.status_start
+            date_range = [entry.status_start - dt for x in range(ndays)]
+            for d in date_range:
+                d = d.replace(tzinfo=pytz.UTC)
+                timeline.append( (d, entry.status) )
+        else:
+            timeline.append( (entry.status_start, entry.status) )
+
+    tel_status.timeline = timeline
+
+    return tel_status
+
 class SiteDetailView(DetailView):
     template_name = 'oss/site_summary.html'
     model = Site
@@ -95,7 +121,7 @@ class SiteDetailView(DetailView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['tel_list'] = Telescope.objects.filter(site=self.object)
-        context['tel_states'] = get_status_for_telescopes(self.object, context['tel_list'])
+        context['tel_states'] = get_current_status_for_telescopes(self.object, context['tel_list'])
         return context
 
 class TelescopeDetailView(DetailView):
@@ -118,7 +144,7 @@ class TelescopeDetailView(DetailView):
                     description += cap.descriptor
             instrument_list.append( (instrument, description) )
         context['instrument_list'] = instrument_list
-        context['tel_states'] = get_status_for_telescopes(self.object, [self.object])
+        context['tel_state'] = get_status_timeline_for_telescope(self.object)
         return context
 
 class InstrumentDetailView(DetailView):

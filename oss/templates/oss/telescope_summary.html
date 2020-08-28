@@ -1,7 +1,7 @@
 {% extends "oss/base.html" %}
 
 {% block page_title %}{{page.name}}{% endblock %}
-{% load facility_data %}
+{% load facility_data plot_status_calendar %}
 {% block content %}
 
 <div style="margin-top: 20px;">
@@ -21,22 +21,28 @@
     </div>
 
     <div class="col-md-8">
-      <h3>Instruments available at {{object.name}}</h3>
-      {% if instrument_list|length > 0 %}
-        <table class="table table-bordered">
-          <caption>Instrumentation available at {{object.name}}</caption>
-          <thead class="thead-dark">
-            <tr><th style="font-size:18px">Instrument</th>
-            <th style="font-size:18px">Capabilities</th></tr>
-          </thead>
-          {% for instrument,description in instrument_list %}
-            <tr><td><a href="{% url 'instrument_summary' pk=instrument.pk %}">{{instrument.name}}</a></td>
-                    <td>{{description}}</td></tr>
-          {% endfor %}
-        </table>
-      {% else %}
-        <p>No instrument list available for this site</p>
-      {% endif %}
+      <div class="row">
+        <h3>Instruments available at {{object.name}}</h3>
+        {% if instrument_list|length > 0 %}
+          <table class="table table-bordered">
+            <caption>Instrumentation available at {{object.name}}</caption>
+            <thead class="thead-dark">
+              <tr><th style="font-size:18px">Instrument</th>
+              <th style="font-size:18px">Capabilities</th></tr>
+            </thead>
+            {% for instrument,description in instrument_list %}
+              <tr><td><a href="{% url 'instrument_summary' pk=instrument.pk %}">{{instrument.name}}</a></td>
+                      <td>{{description}}</td></tr>
+            {% endfor %}
+          </table>
+        {% else %}
+          <p>No instrument list available for this site</p>
+        {% endif %}
+      </div>
+
+      <div class="row">
+        {% status_calendar tel_state %}
+      </div>
     </div>
 
   </div>
