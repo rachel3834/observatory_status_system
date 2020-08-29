@@ -6,6 +6,12 @@
 
 <div style="margin-top: 20px;">
 
+  <p><center><h4>{{object.name}}</h4>
+    {% if object.url|length > 0 %}
+      Website: <a href="{{object.url}}">{{object.url}}</a>
+    {% endif %}
+  </center></p>
+
   <div class="row">
 
     <div class="col-md-4">
@@ -19,15 +25,12 @@
             <tr><th>Orbit</th><td>{{object.orbit}}</td></tr>
           {% endif %}
           <tr><th>Site code</th><td>{{object.site_code}}</td></tr>
-          {% if object.url|length > 0 %}
-            <tr><th>Website</th><td><a href="{{object.url}}">{{object.url}}</a></td></tr>
-          {% endif %}
         </table>
       </div>
     </div>
 
     <div class="col-md-8">
-      <h3>Facilities located at {{site.name}}</h3>
+      <h5>Telescope Facilities</h5>
       {% if tel_states|length > 0 %}
         <table class="table table-bordered">
           <caption>Status of astronomical observing facilities located at {{site.name}}</caption>

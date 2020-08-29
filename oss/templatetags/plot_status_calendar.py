@@ -26,16 +26,16 @@ def status_calendar(tel_status):
 
     colorscale = [
     [0.0, 'rgb(50, 168, 82)'],    # Open
-    [0.09, 'rgb(50, 168, 82)'],    # Open
-    [0.1, 'rgb(26, 80, 196)'],  # Closed-weather
-    [0.19, 'rgb(26, 80, 196)'],  # Closed-weather
-    [0.2, 'rgb(224, 132, 40)'], # Closed-unsafe
-    [0.29, 'rgb(224, 132, 40)'], # Closed-unsafe
-    [0.3, 'rgb(218, 224, 40)'], # Closed-daytime
-    [0.39, 'rgb(218, 224, 40)'], # Closed-daytime
-    [0.4, 'rgb(83, 7, 105)'],     # Offline
-    [0.49, 'rgb(83, 7, 105)'],     # Offline
-    [0.5, 'rgb(168, 160, 160)'], # Unrecognised status
+    [0.16, 'rgb(50, 168, 82)'],    # Open
+    [0.17, 'rgb(26, 80, 196)'],  # Closed-weather
+    [0.33, 'rgb(26, 80, 196)'],  # Closed-weather
+    [0.34, 'rgb(224, 132, 40)'], # Closed-unsafe
+    [0.49, 'rgb(224, 132, 40)'], # Closed-unsafe
+    [0.5, 'rgb(218, 224, 40)'], # Closed-daytime
+    [0.66, 'rgb(218, 224, 40)'], # Closed-daytime
+    [0.67, 'rgb(83, 7, 105)'],     # Offline
+    [0.82, 'rgb(83, 7, 105)'],     # Offline
+    [0.83, 'rgb(168, 160, 160)'], # Unrecognised status
     [1.0, 'rgb(168, 160, 160)'], # Unrecognised status
     ]
 
@@ -79,9 +79,7 @@ def status_calendar(tel_status):
 
     # Initialize whole mape to 'Unknown' status
     status_data = [0.5]*len(dates_in_year)
-
-    # context['status_data'] needs to be a list of entries for each date of the year
-    for d, stat in tel_status.timeline:
+    for d, stat, last_update in tel_status.timeline:
         day = datetime(d.year, d.month, d.day, tzinfo=pytz.UTC)
         if day >= start_date:
             idx = np.where(dates_in_year == day)[0]

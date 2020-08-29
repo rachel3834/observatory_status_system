@@ -7,7 +7,7 @@ from oss.models import FacilityOperator, Site, Installation, Telescope
 from oss.models import InstrumentCapabilities, Instrument, FacilityStatus
 from rest_framework import viewsets
 from rest_framework import permissions
-from oss.serializers import TelescopeSerializer
+from oss.serializers import FacilityStatusSerializer
 from datetime import datetime, timedelta
 import pytz
 
@@ -99,18 +99,34 @@ def get_status_timeline_for_telescope(telescope):
 
     timeline = []
     for entry in qs:
-        if entry.status_end:
-            ndays = entry.status_end - entry.status_start
-            date_range = [entry.status_start - dt for x in range(ndays)]
+        if entry.status_end and entry.status_start != entry.status_end:
+            date_range = entry.status_end - entry.status_start
+            date_range = [entry.status_start + timedelta(days=x) for x in range(date_range.days+1)]
             for d in date_range:
                 d = d.replace(tzinfo=pytz.UTC)
-                timeline.append( (d, entry.status) )
+                timeline = add_entry_to_timeline( (d, entry.status, entry.last_updated), timeline )
         else:
-            timeline.append( (entry.status_start, entry.status) )
+            timeline = add_entry_to_timeline( (entry.status_start, entry.status, entry.last_updated), timeline )
 
     tel_status.timeline = timeline
 
     return tel_status
+
+def add_entry_to_timeline(new_entry, timeline):
+
+    idx = None
+    for i, entry in enumerate(timeline):
+        if entry[0] == new_entry[0]:
+            if new_entry[2] >= entry[2]:
+                idx = i
+            else:
+                idx = -1
+    if idx == None:
+        timeline.append(new_entry)
+    elif idx > -1:
+        timeline[idx] = new_entry
+
+    return timeline
 
 class SiteDetailView(DetailView):
     template_name = 'oss/site_summary.html'
@@ -166,22 +182,39 @@ class InstrumentDetailView(DetailView):
         context['description'] = description
         return context
 
-class GetTelescopeCurrentStatusView(viewsets.ModelViewSet):
-    """Class to return the status of a Telescope"""
-    queryset = Telescope.objects.all().order_by('name')
-    serializer_class = TelescopeSerializer
+class FacilityStatusView(viewsets.ModelViewSet):
+    """View handling Facility Status.  Allows list and create"""
+    queryset = FacilityStatus.objects.all().order_by('last_updated')
+    serializer_class = FacilityStatusSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    def create(self, request, *args, **kwargs):
+
+        keys = [ 'telescope','instrument','status','status_start',
+                'status_end','comment','last_updated']
+        state = {}
+        for key in keys:
+            if key in request.data.keys():
+                state[key] = request.data[key]
+
+        if 'telescope' in state:
+            state['telescope'] = Telescope.objects.get(pk=int(state['telescope']))
+        elif 'instrument' in state:
+            state['instrument'] = Instrument.objects.get(pk=int(state['instrument']))
+
+        try:
+            FacilityStatus.objects.create(**state)
+        except Telescope.DoesNotExist:
+            pass
+
+        response = super().create(request, *args, **kwargs)
+        return response
 
 ### TODO:
 ## Add content of other observatorys
-# TelescopeDetailView & InstrumentDetailView
-# -> Summary of parameters plus timeline of status
 # SetTelescopeStatusView
 # SetInstrumentStatusView
 # -> Corresponding tool to submit data to these APIs
 # Online form views for these
-# GetTelescopeStatusView
-# GetInstrumentStatusView
 # Management commands to fetch status of other facilities
 # Add an about page, with documentation on where to find more information

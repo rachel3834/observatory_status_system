@@ -113,7 +113,7 @@ class FacilityStatus(models.Model):
                 )
     instrument = models.ForeignKey(Instrument, on_delete=models.CASCADE, blank=True, null=True)
     telescope = models.ForeignKey(Telescope, on_delete=models.CASCADE, blank=True, null=True)
-    status = models.CharField("Status", max_length=50)
+    status = models.CharField("Status", max_length=50, choices=states)
     status_start = models.DateTimeField('DateTime status begins')
     status_end = models.DateTimeField('DateTime status ends',
                                 null=True, blank=True)

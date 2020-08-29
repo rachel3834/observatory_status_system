@@ -16,7 +16,7 @@
             <th style="font-size:18px">Comment</th></tr>
       </thead>
         {% for site_name, site_id, site_status in site_states %}
-          <tr><td><h5><a href="{% url 'site_summary' pk=site_id %}">{{site_name}}</a></h5></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td><a href="{% url 'site_summary' pk=site_id %}">{{site_name}}</a></td><td></td><td></td><td></td><td></td></tr>
             {% for tel_status in site_status %}
               {% telescope_status_entry tel_status %}
             {% endfor %}

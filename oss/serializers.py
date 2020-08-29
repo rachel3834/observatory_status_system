@@ -1,7 +1,9 @@
-from .models import Telescope
+from .models import Telescope, FacilityStatus
 from rest_framework import serializers
 
-class TelescopeSerializer(serializers.HyperlinkedModelSerializer):
+class FacilityStatusSerializer(serializers.HyperlinkedModelSerializer):
+    telescope = serializers.StringRelatedField()
+    instrument = serializers.StringRelatedField()
     class Meta:
-        model = Telescope
-        fields = ['name', 'tel_code', 'site']
+        model = FacilityStatus
+        fields = ['telescope', 'instrument', 'status_start', 'status_end', 'status', 'comment']

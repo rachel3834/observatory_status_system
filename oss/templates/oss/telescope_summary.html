@@ -6,25 +6,28 @@
 
 <div style="margin-top: 20px;">
 
+    <p><center><h4>{{object.name}}</h4>
+      {% if object.url|length > 0 %}
+        Website: <a href="{{object.url}}">{{object.url}}</a>
+      {% endif %}
+    </center></p>
+
   <div class="row">
 
     <div class="col-md-4">
       <div id="site-info">
         <table class="table">
-          <tr><th>Site</th><td><a href="{{site.url}}">{{site.name}}</a></td></tr>
+          <tr><th>Site</th><td><a href="{% url 'site_summary' pk=site.pk %}">{{site.name}}</a></td></tr>
           <tr><th>Installation</th><td>{{installation.name}}</td></tr>
-          {% if object.url|length > 0 %}
-            <tr><th>Website</th><td><a href="{{object.url}}">{{object.url}}</a></td></tr>
-          {% endif %}
         </table>
       </div>
     </div>
 
     <div class="col-md-8">
       <div class="row">
-        <h3>Instruments available at {{object.name}}</h3>
+        <p>
         {% if instrument_list|length > 0 %}
-          <table class="table table-bordered">
+          <table class="table table-bordered" style="width:80%">
             <caption>Instrumentation available at {{object.name}}</caption>
             <thead class="thead-dark">
               <tr><th style="font-size:18px">Instrument</th>
@@ -38,6 +41,7 @@
         {% else %}
           <p>No instrument list available for this site</p>
         {% endif %}
+        </p>
       </div>
 
       <div class="row">
