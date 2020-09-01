@@ -15,11 +15,11 @@ def status_calendar(tel_status):
     plotly community example by user Blaceus
     """
     status_map = {'Open': 0.0,
-                  'Closed-weather': 0.1,
-                  'Closed-unsafe-to-observe': 0.2,
-                  'Closed-daytime': 0.3,
-                  'Offline': 0.4,
-                  'Unknown': 0.5}
+                  'Closed-weather': 0.17,
+                  'Closed-unsafe-to-observe': 0.34,
+                  'Closed-daytime': 0.5,
+                  'Offline': 0.67,
+                  'Unknown': 0.83}
     rev_status_map = {}
     for key, value in status_map.items():
         rev_status_map[value] = key
@@ -78,14 +78,14 @@ def status_calendar(tel_status):
         #print(i, d, weeks[-1], d.strftime("%W"), weekdays[-1], months[-1], months_text[-1], year_rollover)
 
     # Initialize whole mape to 'Unknown' status
-    status_data = [0.5]*len(dates_in_year)
+    status_data = [0.83]*len(dates_in_year)
     for d, stat, last_update in tel_status.timeline:
         day = datetime(d.year, d.month, d.day, tzinfo=pytz.UTC)
         if day >= start_date:
             idx = np.where(dates_in_year == day)[0]
             if len(idx) > 0:
                 status_data[idx[0]] = status_map[stat]
-
+                print(stat, d, status_data[idx[0]])
     entry_labels = []
     for i,d in enumerate(dates_in_year):
         entry_labels.append(str(d)+': '+rev_status_map[status_data[i]])
@@ -102,6 +102,7 @@ def status_calendar(tel_status):
             ygap=3,
             showscale=False,
             colorscale=colorscale,
+            zmin=colorscale[0][0], zmax=colorscale[-1][0],
             )
         ]
     layout = go.Layout(
@@ -126,5 +127,6 @@ def status_calendar(tel_status):
     )
 
     fig = offline.plot(go.Figure(data=data, layout=layout), output_type='div')
+    #fig.data[0].update(zmin=colorscale[0][0], zmax=colorscale[-1][0])
 
     return {'figure': fig}
