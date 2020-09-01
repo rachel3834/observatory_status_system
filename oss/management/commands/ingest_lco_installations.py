@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
-from oss.models import Installation, Site, FacilityOperator
+from oss.models import Installation, Site
 from oss.management.commands import lco, ingest_utils
 
 class Command(BaseCommand):
