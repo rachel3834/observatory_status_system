@@ -33,6 +33,33 @@
           <a class="nav-link" href="{% url 'facilities_list' %}">Facility status list</a>
         </li>
       </ul>
+
+      {% if user.is_authenticated %}
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'set_facility_status' %}">Set facility status</a>
+          </li>
+        </ul>
+      {% endif %}
+
+      <ul class="navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            {% if user.first_name or user.last_name %}
+              {{ user.first_name }}
+            {% else %}
+              {{ user.username }}
+            {% endif %}
+          </li>
+          <li>
+            <a class="btn btn-outline-success" title="logout" href="{% url 'logout' %}">Logout</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="btn btn-outline-success" title="logout" href="{% url 'login' %}">Login</a>
+          </li>
+        {% endif %}
+        </ul>
     </div>
   </nav>
   <!-- END Header -->

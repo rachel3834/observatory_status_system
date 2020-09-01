@@ -3,13 +3,18 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django_filters.views import FilterView
 from django.views.generic.detail import DetailView
-from oss.models import FacilityOperator, Site, Installation, Telescope
+from django.views.generic.edit import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
+from oss.models import Site, Installation, Telescope
 from oss.models import InstrumentCapabilities, Instrument, FacilityStatus
+from .forms import SetTelescopeStatusForm
 from rest_framework import viewsets
 from rest_framework import permissions
 from oss.serializers import FacilityStatusSerializer
 from datetime import datetime, timedelta
 import pytz
+from itertools import chain
 
 class TelescopeStatus():
     def __init__(self):
@@ -182,39 +187,30 @@ class InstrumentDetailView(DetailView):
         context['description'] = description
         return context
 
-class FacilityStatusView(viewsets.ModelViewSet):
-    """View handling Facility Status.  Allows list and create"""
-    queryset = FacilityStatus.objects.all().order_by('last_updated')
-    serializer_class = FacilityStatusSerializer
-    permission_classes = [permissions.IsAuthenticated]
+class FacilityStatusCreate(LoginRequiredMixin, CreateView):
+    template_name = 'oss/set_facility_status.html'
+    model = FacilityStatus
+    #fields = ['instrument', 'telescope', 'status', 'status_start', 'status_end', 'comment']
+    form_class = SetTelescopeStatusForm
 
-    def create(self, request, *args, **kwargs):
+    def get_form(self, *args, **kwargs):
+        form = super().get_form(*args, **kwargs)
+#        tel_list = Telescope.objects.filter(operator=self.request.user)
+#        form.fields['telescope'].queryset = Telescope.objects.filter(operator=self.request.user)
+#        qs = Instrument.objects.filter(telescope=tel_list[0])
+#        for tel in tel_list[1:]:
+#            qs2 = Instrument.objects.filter(telescope=tel)
+#            qs.union(qs2)
+#        form.fields['instrument'].queryset = qs
+        return form
 
-        keys = [ 'telescope','instrument','status','status_start',
-                'status_end','comment','last_updated']
-        state = {}
-        for key in keys:
-            if key in request.data.keys():
-                state[key] = request.data[key]
-
-        if 'telescope' in state:
-            state['telescope'] = Telescope.objects.get(pk=int(state['telescope']))
-        elif 'instrument' in state:
-            state['instrument'] = Instrument.objects.get(pk=int(state['instrument']))
-
-        try:
-            FacilityStatus.objects.create(**state)
-        except Telescope.DoesNotExist:
-            pass
-
-        response = super().create(request, *args, **kwargs)
-        return response
+    def form_valid(self, form):
+        form.instance.last_updated = datetime.utcnow()
+        return super().form_valid(form)
 
 ### TODO:
 ## Add content of other observatorys
 # SetTelescopeStatusView
-# SetInstrumentStatusView
-# -> Corresponding tool to submit data to these APIs
 # Online form views for these
 # Management commands to fetch status of other facilities
 # Add an about page, with documentation on where to find more information

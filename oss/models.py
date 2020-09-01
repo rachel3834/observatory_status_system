@@ -1,14 +1,6 @@
 from django.db import models
 from django.utils import timezone
-
-# Create your models here.
-class FacilityOperator(models.Model):
-    def __str__(self):
-        return self.name
-    name = models.CharField("Operator Name", max_length=50)
-    email = models.EmailField("Email")
-    institution = models.CharField("Institution", max_length=50)
-    url = models.URLField(max_length=200, null=True, blank=True)
+from django.conf import settings
 
 class Site(models.Model):
     def __str__(self):
@@ -53,7 +45,6 @@ class Installation(models.Model):
     type = models.CharField("Type", max_length=30, choices=installation_options,
                             default='Dome', null=True, blank=True)
     site = models.ForeignKey(Site, on_delete=models.PROTECT)
-    operator = models.ForeignKey(FacilityOperator, on_delete=models.PROTECT, null=True)
 
 class Telescope(models.Model):
     def __str__(self):
@@ -63,7 +54,7 @@ class Telescope(models.Model):
     tel_code = models.CharField("Telescope code", max_length=50, null=True, blank=True)
     aperture = models.DecimalField("Telescope Effective Aperture (m)", max_digits=6,
                                   decimal_places=2, null=True, blank=True)
-    operator = models.ForeignKey(FacilityOperator, on_delete=models.PROTECT)
+    operator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, null=True, blank=True)
     site = models.ForeignKey(Site, on_delete=models.PROTECT)
     installation = models.ForeignKey(Installation, on_delete=models.PROTECT)
     url = models.URLField(max_length=200, null=True, blank=True)

@@ -9,7 +9,7 @@ class Command(BaseCommand):
 
     def _ingest_telescopes(self):
         tel_list = lco.fetch_lco_telescopes()
-        operator = FacilityOperator.objects.filter(name='Las Cumbres Observatory')[0]
+        operator = User.objects.filter(username='rstreet')[0]
 
         for tel in tel_list:
             qs = Site.objects.filter(site_code=tel['site_code'])
