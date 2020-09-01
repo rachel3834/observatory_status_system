@@ -90,7 +90,7 @@ class Instrument(models.Model):
 class FacilityStatus(models.Model):
     def __str__(self):
         try:
-            self.instrument.name+' '+self.status
+            return self.instrument.name+' '+self.status
         except AttributeError:
             return self.telescope.tel_code+' '+self.status
 

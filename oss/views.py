@@ -3,9 +3,11 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django_filters.views import FilterView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, FormView
+from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django.urls import reverse, reverse_lazy
 from oss.models import Site, Installation, Telescope
 from oss.models import InstrumentCapabilities, Instrument, FacilityStatus
 from .forms import SetTelescopeStatusForm
@@ -187,30 +189,22 @@ class InstrumentDetailView(DetailView):
         context['description'] = description
         return context
 
-class FacilityStatusCreate(LoginRequiredMixin, CreateView):
+class FacilityStatusCreate(LoginRequiredMixin, FormView):
     template_name = 'oss/set_facility_status.html'
-    model = FacilityStatus
-    #fields = ['instrument', 'telescope', 'status', 'status_start', 'status_end', 'comment']
     form_class = SetTelescopeStatusForm
-
-    def get_form(self, *args, **kwargs):
-        form = super().get_form(*args, **kwargs)
-#        tel_list = Telescope.objects.filter(operator=self.request.user)
-#        form.fields['telescope'].queryset = Telescope.objects.filter(operator=self.request.user)
-#        qs = Instrument.objects.filter(telescope=tel_list[0])
-#        for tel in tel_list[1:]:
-#            qs2 = Instrument.objects.filter(telescope=tel)
-#            qs.union(qs2)
-#        form.fields['instrument'].queryset = qs
-        return form
+    success_url =reverse_lazy('facilities_list')
 
     def form_valid(self, form):
-        form.instance.last_updated = datetime.utcnow()
+        status = FacilityStatus.objects.create(telescope=form.cleaned_data['telescope'][0],
+                                              instrument=form.cleaned_data['instrument'][0],
+                                                status=form.cleaned_data['status'],
+                                                status_start=form.cleaned_data['status_start'],
+                                                status_end=form.cleaned_data['status_end'],
+                                                comment=form.cleaned_data['comment'],
+                                                last_updated=form.cleaned_data['last_updated'])
         return super().form_valid(form)
 
-### TODO:
+
 ## Add content of other observatorys
-# SetTelescopeStatusView
-# Online form views for these
 # Management commands to fetch status of other facilities
 # Add an about page, with documentation on where to find more information

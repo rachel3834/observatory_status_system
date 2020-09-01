@@ -4,74 +4,12 @@
 {% load facility_data %}
 {% block content %}
 <div style="margin-top: 20px;">
-<center>
     <h3>Set the Current Status of a Facility</h3>
-    {% csrf_token %}
-    {{ formset.management_form }}
-    {{ formset.errors }}
-    <form method="post" class="form">
-    <table>
-      <tr>
-        <td><label for="{{form.instrument.id_for_label}}">
-                <select name="instrument">
-                {% for instrument in instruments %}
-                    <option value="{{instrument.pk}}">{{instrument.name}}</option>
-                {% endfor %}
-                </select>
-          </label></td>
-          <td><label for="{{form.telescope.id_for_label}}">
-                  <select name="telescope">
-                  {% for instrument in telescope %}
-                      <option value="{{telescope.pk}}">{{telescope.name}}</option>
-                  {% endfor %}
-                  </select>
-            </label></td>
-            <td><label for="{{form.status.id_for_label}}">
-                    <select name="status">
-                    {% for state in status %}
-                        <option value="{{state}}">{{state}}</option>
-                    {% endfor %}
-                    </select>
-              </label></td>
-          </tr>
-          <tr>
-             <td><label for="{{form.status_start.id_for_label}}">Start date
-                        <button id="help-start-date">?</button>
-                    :</label>
-                    <p id="correct-start-date-format"> </p>
-                    <script>
-                        document.getElementById("help-start-date").addEventListener("click", show_start_date_format)
 
-                        function show_start_date_format() {
-                          document.getElementById("correct-start-date-format").innerHTML = "Format: YYYY-MM-DD"
-                        }
-                    </script>
-            </td>
-            <td><label for="{{form.status_start.id_for_label}}">End date
-                       <button id="help-end-date">?</button>
-                   :</label>
-                   <p id="correct-end-date-format"> </p>
-                   <script>
-                       document.getElementById("help-start-date").addEventListener("click", show_end_date_format)
-
-                       function show_end_date_format() {
-                         document.getElementById("correct-start-date-format").innerHTML = "Format: YYYY-MM-DD"
-                       }
-                   </script>
-           </td>
-           <td></td>
-          </tr>
-          <tr>
-            <td><label for="{{form.comment.id_for_label}}">
-              <td><div class="fieldWrapper">
-                            {{form.comment.errors}}
-                            {{form.comment}}
-                  </div>
-              </td>
-              </td>
-          </tr>
-    <button type="submit" formaction="{% url 'set_facility_status' %}"class="btn btn-primary">Save</button>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_table }}
+      <input type="submit" value="Save">
     </form>
-</center>
 </div>
 {% endblock %}
