@@ -24,7 +24,7 @@ class Command(BaseCommand):
                 for capability in instrument['capabilities']:
                     qs = InstrumentCapabilities.objects.filter(descriptor=capability)
                     if len(qs) == 0:
-                        cap = InstrumentCapabilities.create(descriptor=capability)
+                        cap = InstrumentCapabilities.objects.create(descriptor=capability)
                     else:
                         cap = qs[0]
 
