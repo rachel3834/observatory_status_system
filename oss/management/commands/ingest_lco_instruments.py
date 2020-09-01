@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
-from oss.models import Site, Installation, Telescope, FacilityOperator
+from oss.models import Site, Installation, Telescope
 from oss.models import Instrument, InstrumentCapabilities
 from oss.management.commands import lco, ingest_utils
 
@@ -10,7 +10,6 @@ class Command(BaseCommand):
 
     def _ingest_telescopes(self):
         instrument_list = lco.fetch_lco_instruments()
-        operator = FacilityOperator.objects.filter(name='Las Cumbres Observatory')[0]
 
         for instrument in instrument_list:
             qs = Telescope.objects.filter(tel_code=instrument['tel_code'])
