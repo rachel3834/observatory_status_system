@@ -30,6 +30,13 @@
     </div>
 
     <div class="col-md-8">
+        <h5>Telescope Facilities</h5>
+        {% if tel_states|length > 0 %}
+          {% telescopes_table tel_states %}
+        {% else %}
+          <p>No telescope list available for this site</p>
+        {% endif %}
+  <!--  <div class="col-md-8">
       <h5>Telescope Facilities</h5>
       {% if tel_states|length > 0 %}
         <table class="table table-bordered">
@@ -47,8 +54,7 @@
       {% else %}
         <p>No telescope list available for this site</p>
       {% endif %}
-    </div>
-
+    </div> -->
   </div>
 
 </div>

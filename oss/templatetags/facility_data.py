@@ -60,27 +60,9 @@ def telescope_site_entry(tel_status):
 def format_link_entry(link_text, url):
     return f"["+link_text+"]("+url+")"
 
-@register.inclusion_tag('oss/partials/facilities_table.html')
-def facilities_table(site_states):
-    """Produces a Dash interactive table of facilities"""
+def build_facilities_datatable(table_columns, table_data):
 
-    app = DjangoDash('FacilitiesTable')
-
-    table_columns = [dict(name='Site', id='Site', type='text', presentation='markdown'),
-                     dict(name='Facility', id='Facility', type='text', presentation='markdown'),
-                     dict(name='Instrument', id='Instrument', type='text', presentation='markdown'),
-                     dict(name='Status', id='Status'),
-                     dict(name='Comment', id='Comment')]
-
-    table_data = []
-    for site_name, site_id, site_status in site_states:
-        for tel_status in site_status:
-            for instrument in tel_status.instruments:
-                table_data.append( dict(Site=format_link_entry(site_name, '/site/'+str(site_id)+'/'),
-                                     Facility=format_link_entry(tel_status.name, '/telescope/'+str(tel_status.telescope.pk)+'/'),
-                                     Instrument=format_link_entry(instrument[0], '/instrument/'+str(instrument[3])+'/'),
-                                     Status=tel_status.status, #-> instrument[1],
-                                     Comment=instrument[2]) )
+    app = DjangoDash('facilitiestable')
 
     app.layout = html.Div( dash_table.DataTable(
                     id='FacilitiesTable',
@@ -120,5 +102,50 @@ def facilities_table(site_states):
                                             'color': 'white' },
                                     ],
                     ) )
+
+    return app
+
+@register.inclusion_tag('oss/partials/facilities_table.html')
+def facilities_table(site_states):
+    """Produces a Dash interactive table of facilities"""
+
+    table_columns = [dict(name='Site', id='Site', type='text', presentation='markdown'),
+                     dict(name='Facility', id='Facility', type='text', presentation='markdown'),
+                     dict(name='Instrument', id='Instrument', type='text', presentation='markdown'),
+                     dict(name='Status', id='Status'),
+                     dict(name='Comment', id='Comment')]
+
+    table_data = []
+    for site_name, site_id, site_status in site_states:
+        for tel_status in site_status:
+            for instrument in tel_status.instruments:
+                table_data.append( dict(Site=format_link_entry(site_name, '/site/'+str(site_id)+'/'),
+                                     Facility=format_link_entry(tel_status.name, '/telescope/'+str(tel_status.telescope.pk)+'/'),
+                                     Instrument=format_link_entry(instrument[0], '/instrument/'+str(instrument[3])+'/'),
+                                     Status=tel_status.status, #-> instrument[1],
+                                     Comment=instrument[2]) )
+
+    app = build_facilities_datatable(table_columns, table_data)
+
+    return {'request': app}
+
+@register.inclusion_tag('oss/partials/facilities_table.html')
+def telescopes_table(tel_states):
+    """Produces a Dash interactive table of facilities"""
+
+    table_columns = [dict(name='Facility', id='Facility', type='text', presentation='markdown'),
+                     dict(name='Instrument', id='Instrument', type='text', presentation='markdown'),
+                     dict(name='Status', id='Status'),
+                     dict(name='Comment', id='Comment')]
+
+    table_data = []
+    for tel_status in tel_states:
+        for instrument in tel_status.instruments:
+            table_data.append( dict(Facility=format_link_entry(tel_status.name, '/telescope/'+str(tel_status.telescope.pk)+'/'),
+                                 Instrument=format_link_entry(instrument[0], '/instrument/'+str(instrument[3])+'/'),
+                                 Status=tel_status.status, #-> instrument[1],
+                                 Comment=instrument[2]) )
+
+    app = build_facilities_datatable(table_columns, table_data)
 
     return {'request': app}
