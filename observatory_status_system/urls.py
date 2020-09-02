@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    path('django_plotly_dash/', include('django_plotly_dash.urls')),
     path('admin/', admin.site.urls),
     path('oss/', include('oss.urls')),
     path('', include('oss.urls')),

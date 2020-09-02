@@ -1,5 +1,11 @@
 from django import template
 from django.conf import settings
+import dash
+#import dash_core_components as dcc
+import dash_html_components as html
+import dash_table
+from django_plotly_dash import DjangoDash
+import pandas as pd
 
 register = template.Library()
 
@@ -50,3 +56,69 @@ def telescope_site_entry(tel_status):
     context = color_code_telescope_status(tel_status)
     context['tel_id'] = tel_status.telescope.pk
     return context
+
+def format_link_entry(link_text, url):
+    return f"["+link_text+"]("+url+")"
+
+@register.inclusion_tag('oss/partials/facilities_table.html')
+def facilities_table(site_states):
+    """Produces a Dash interactive table of facilities"""
+
+    app = DjangoDash('FacilitiesTable')
+
+    table_columns = [dict(name='Site', id='Site', type='text', presentation='markdown'),
+                     dict(name='Facility', id='Facility', type='text', presentation='markdown'),
+                     dict(name='Instrument', id='Instrument', type='text', presentation='markdown'),
+                     dict(name='Status', id='Status'),
+                     dict(name='Comment', id='Comment')]
+
+    table_data = []
+    for site_name, site_id, site_status in site_states:
+        for tel_status in site_status:
+            for instrument in tel_status.instruments:
+                table_data.append( dict(Site=format_link_entry(site_name, '/site/'+str(site_id)+'/'),
+                                     Facility=format_link_entry(tel_status.name, '/telescope/'+str(tel_status.telescope.pk)+'/'),
+                                     Instrument=format_link_entry(instrument[0], '/instrument/'+str(instrument[3])+'/'),
+                                     Status=tel_status.status, #-> instrument[1],
+                                     Comment=instrument[2]) )
+
+    app.layout = html.Div( dash_table.DataTable(
+                    id='FacilitiesTable',
+                    columns=table_columns,
+                    data=table_data,
+                    sort_action="native",
+                    filter_action="native",
+                    style_table={'height': '600px', 'overflowY': 'auto'},
+                    style_cell={'fontSize':18, 'font-family':'sans-serif'},
+                    style_cell_conditional=[
+                                        {  'if': {'column_id': 'Status'},
+                                            'backgroundColor': 'white',
+                                            'color': 'black' },
+                                        {  'if': {'column_id': 'Status',
+                                                      'filter_query': '{Status} = "Offline"'},
+                                                'backgroundColor': 'rgb(83, 7, 105)',
+                                                'color': 'white' },
+                                        {  'if': {'column_id': 'Status',
+                                                  'filter_query': '{Status} = "Open"'},
+                                            'backgroundColor': 'rgb(50, 168, 82)',
+                                            'color': 'white' },
+                                        {  'if': {'column_id': 'Status',
+                                                  'filter_query': '{Status} = "Closed-weather"'},
+                                            'backgroundColor': 'rgb(26, 80, 196)',
+                                            'color': 'white' },
+                                        {  'if': {'column_id': 'Status',
+                                                  'filter_query': '{Status} = "Closed-unsafe"'},
+                                            'backgroundColor': 'rgb(224, 132, 40)',
+                                            'color': 'white' },
+                                        {  'if': {'column_id': 'Status',
+                                                  'filter_query': '{Status} = "Closed-daytime"'},
+                                            'backgroundColor': 'rgb(218, 224, 40)',
+                                            'color': 'white' },
+                                        {  'if': {'column_id': 'Status',
+                                                  'filter_query': '{Status} = "Unknown"'},
+                                            'backgroundColor': 'rgb(168, 160, 160)',
+                                            'color': 'white' },
+                                    ],
+                    ) )
+
+    return {'request': app}
