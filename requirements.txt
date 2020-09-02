@@ -36,6 +36,7 @@ Markdown==3.2.2
 MarkupSafe==1.1.1
 numpy==1.19.1
 ordereddict==1.1
+pandas==1.1.1
 parso==0.7.1
 pexpect==4.8.0
 pickleshare==0.7.5
