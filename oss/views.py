@@ -52,7 +52,6 @@ class FacilityListView(FilterView):
 
             site_status.append( tel_states )
 
-
         #context['tel_states'] = [tel_states[i] for (v, i) in sorted((v, i) for (i, v) in enumerate(tel_names)) ]
         context['site_states'] = zip(site_names, site_ids, site_status)
 

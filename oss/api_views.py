@@ -8,9 +8,20 @@ from oss.models import Site, Installation, Telescope
 from oss.models import InstrumentCapabilities, Instrument, FacilityStatus
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from oss.serializers import FacilityStatusSerializer
 from datetime import datetime, timedelta
 import pytz
+
+class FacilityStatusView(APIView):
+    """View handling publicly-accessible facility status functions.
+    Allows list only."""
+
+    def get(self, request, format=None):
+        queryset = FacilityStatus.objects.all().order_by('last_updated')
+        serializer = FacilityStatusSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 class UpdateFacilityStatusView(LoginRequiredMixin, viewsets.ModelViewSet):
     """View handling Facility Status.  Allows list and create"""

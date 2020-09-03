@@ -62,7 +62,7 @@ def format_link_entry(link_text, url):
 
 def build_facilities_datatable(table_columns, table_data):
 
-    app = DjangoDash('facilitiestable')
+    app = DjangoDash('FacilitiesTable')
 
     app.layout = html.Div( dash_table.DataTable(
                     id='FacilitiesTable',

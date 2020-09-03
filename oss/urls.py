@@ -4,6 +4,8 @@ from rest_framework import routers
 from django.contrib.auth.views import LoginView, LogoutView
 from . import views, api_views
 
+from . import facilities_table_app
+
 router = routers.DefaultRouter()
 router.register(r'update_facility_status', api_views.UpdateFacilityStatusView)
 
@@ -16,4 +18,5 @@ urlpatterns = [
     path('instrument/<int:pk>/', views.InstrumentDetailView.as_view(), name='instrument_summary'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('set_facility_status', views.FacilityStatusCreate.as_view(), name='set_facility_status'),
+    path('facility_status/', api_views.FacilityStatusView.as_view(), name='set_facility_status'),
 ]

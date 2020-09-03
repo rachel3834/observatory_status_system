@@ -1,12 +1,12 @@
 {% extends "oss/base.html" %}
 
 {% block page_title %}{{page.name}}{% endblock %}
-{% load facility_data %}
+{% load plotly_dash %}
 {% block content %}
 <div style="margin-top: 20px;">
 <center>
     <h3>Astronomical Observing Facility Status</h3>
-    {% facilities_table site_states %}
+    {% plotly_app name="facilitiestable" ratio=1 site_states %}
 </center>
 </div>
 {% endblock %}
