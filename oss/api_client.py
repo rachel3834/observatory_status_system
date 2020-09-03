@@ -1,8 +1,11 @@
 import requests
+import json
 
 class OSSAPIClient():
 
-    def get_facility_status():
-        url = url_tools.concat_urls(config['OSS_URL'],config['facility_status_endpoint'], trailing_slash=True)
-        response = requests.get(url).json()
+    def get_facility_status(self, url):
+        try:
+            response = requests.get(url).json()
+        except json.decoder.JSONDecodeError:
+            response = None
         return response
