@@ -18,6 +18,16 @@ from datetime import datetime, timedelta
 import pytz
 from itertools import chain
 
+class LandingView(DetailView):
+
+    def get(self, request):
+        return render(request, 'oss/landing_page.html', {})
+
+class AboutView(DetailView):
+
+    def get(self, request):
+        return render(request, 'oss/about.html', {})
+
 class TelescopeStatus():
     def __init__(self):
         self.name = None

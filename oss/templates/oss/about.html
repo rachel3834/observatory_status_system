@@ -1,0 +1,41 @@
+{% extends "oss/base.html" %}
+
+{% block page_title %}{{page.name}}{% endblock %}
+{% load plotly_dash %}
+{% block content %}
+<div class="container-fluid" style="margin-top: 20px;">
+  <div class="row">
+    <h3>About the OSS</h3>
+
+    <p>The Observatory Status System, or OSS, is designed to provide a database
+      of astronomical observing facilities across the world, with live updates
+      regarding the status and scheduling of instruments and facilities wherever
+      possible. It was developed by Rachel Street and the
+      <a href="https://lco.global/tomtoolkit">TOM toolkit</a> team,
+      building on the idea of a
+      shared spreadsheet of facilities hosted by the <a href="treasuremap.space">Treasuremap</a>
+      system (credit: Samual Wyatt and Griffin Hosseinzadeh).</p>
+
+      <p>Please note the system is still in development!</p>
+
+      <p>The data provided by this system are intended to be publicly available to
+      help observers to coordinate observing programs.  The system offers both
+      an online user interface as well as an Application Programmable Interface.</p>
+
+      <p>A package of commandline tools to access the API are provided by the
+      accompanying <a href="https://github.com/rachel3834/observatory_status_tools">Observatory Status Tools</a> package.  </p>
+
+      <h5>Telescope Operators</h5>
+      <p>Wherever possible the status of different observing facilities are
+        updated automatically once a day by programmatic query.  As this is not
+        possible for all facilities, telescope operators are invited to apply
+        for an account, which would enable them to update the status of their
+        telescopes and/or instruments, either through this UI, or by using
+        the commandline tool in the
+        <a href="https://github.com/rachel3834/observatory_status_tools">Observatory Status Tools</a> package.
+        To apply for an account, please contact: rstreet (at) lco.global.
+      </p>
+  </div>
+</div>
+
+{% endblock %}

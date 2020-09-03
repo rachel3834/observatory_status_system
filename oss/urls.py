@@ -11,7 +11,9 @@ router.register(r'update_facility_status', api_views.UpdateFacilityStatusView)
 
 
 urlpatterns = [
-    path('', views.FacilityListView.as_view(), name='facilities_list'),
+    path('facility_list/', views.FacilityListView.as_view(), name='facilities_list'),
+    path('', views.LandingView.as_view(), name='landing_page'),
+    path('about/', views.AboutView.as_view(), name='about'),
     path('', include(router.urls)),
     path('site/<int:pk>/', views.SiteDetailView.as_view(), name='site_summary'),
     path('telescope/<int:pk>/', views.TelescopeDetailView.as_view(), name='telescope_summary'),

@@ -1,0 +1,35 @@
+{% extends "oss/base.html" %}
+
+{% block page_title %}{{page.name}}{% endblock %}
+{% load plotly_dash %}
+{% block content %}
+<div class="container-fluid" style="margin-top: 20px;">
+  <div class="row">
+
+    <div class="col-md-4">
+      <a href="{% url 'facilities_list' %}">
+        <div class="panel panel-default" id="Facilities status list">
+            <div class="panel-heading">
+              <h4 class="panel-title">Facilities Status Table</h4>
+            </div>
+           <div class="panel-body">
+              <center><img src="/static/oss/observatory_icon3.png" width="300pix"></center>
+           </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-md-4">
+      <a href="{% url 'about' %}">
+        <div class="panel panel-default" id="About page">
+            <div class="panel-heading">
+              <h4 class="panel-title">About</h4>
+            </div>
+           <div class="panel-body">
+              <center><img src="/static/oss/question_mark.png" width="300pix"></center>
+           </div>
+        </div>
+      </a>
+  </div>
+</div>
+{% endblock %}
