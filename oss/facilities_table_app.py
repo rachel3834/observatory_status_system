@@ -8,7 +8,10 @@ from django.conf import settings
 from . import api_client
 
 def format_link_entry(link_text, url):
-    return f"["+link_text+"]("+url+")"
+    if 'None' in url:
+        return 'All instruments'
+    else:
+        return f"["+link_text+"]("+url+")"
 
 app = DjangoDash('FacilitiesTable')
 

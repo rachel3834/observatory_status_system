@@ -140,6 +140,6 @@ LOGOUT_REDIRECT_URL = '/'
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-DEPLOYED_URL = 'https://observatory_status_system.heruku.com'
+DEPLOYED_URL = 'https://observatory-status-system.herokuapp.com'
 
 django_heroku.settings(locals())
