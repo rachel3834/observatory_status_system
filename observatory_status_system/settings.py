@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
@@ -140,6 +140,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-DEPLOYED_URL = 'https://observatory-status-system.herokuapp.com'
+DEPLOYED_URL = 'http://127.0.0.1:8000'
+#DEPLOYED_URL = 'https://observatory-status-system.herokuapp.com'
 
 django_heroku.settings(locals())

@@ -20,5 +20,5 @@ urlpatterns = [
     path('instrument/<int:pk>/', views.InstrumentDetailView.as_view(), name='instrument_summary'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('set_facility_status', views.FacilityStatusCreate.as_view(), name='set_facility_status'),
-    path('facility_status/', api_views.FacilityStatusView.as_view(), name='set_facility_status'),
+    path('facility_status/', api_views.FacilityStatusView.as_view(), name='get_facility_status'),
 ]
