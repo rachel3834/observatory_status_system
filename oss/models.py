@@ -12,6 +12,8 @@ class Site(models.Model):
             ('Earth orbit', 'Earth orbit'),
             ('L2', 'L2'),
             ('Earth-trailing', 'Earth-trailing'),
+            ('Equatorial Earth orbit', 'Equatorial Earth orbit'),
+            ('LEO', 'Low Earth orbit'),
             ('Mars orbit', 'Mars orbit'),
             ('Outbound trajectory', 'Outbound trajectory')
                     )
@@ -71,6 +73,7 @@ class Instrument(models.Model):
     wavelength_options = (
           ('Optical', 'Optical'),
           ('IR', 'Infrared'),
+          ('Millimeter', 'Millimeter'),
           ('Microwave', 'Microwave'),
           ('Radio', 'Radio'),
           ('UV', 'UV'),

@@ -216,4 +216,9 @@ class FacilityStatusCreate(LoginRequiredMixin, FormView):
 
 ## Add content of other observatorys
 # Management commands to fetch status of other facilities
+## http://www-kpno.kpno.noao.edu/weather.shtml
+## ALMA
+## ATCA twitter feed: https://twitter.com/jamie_atca_sss
+## ATLAS dashboards: http://dashboard.fallingstar.com/dash/mlo.html
+
 # Add an about page, with documentation on where to find more information
