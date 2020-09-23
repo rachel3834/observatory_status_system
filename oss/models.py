@@ -41,7 +41,7 @@ class Installation(models.Model):
         ('Dish', 'Dish'),
         ('Enclosure', 'Enclosure'),
         ('Array', 'Array'),
-        ('Spacecraft', 'Spacecraft')
+        ('Spacecraft', 'Spacecraft'),
     )
     name = models.CharField("Installation Name", max_length=50)
     type = models.CharField("Type", max_length=30, choices=installation_options,
@@ -73,6 +73,7 @@ class Instrument(models.Model):
     wavelength_options = (
           ('Optical', 'Optical'),
           ('IR', 'Infrared'),
+          ('Optical/NIR', 'Optical/Infrared'),
           ('Millimeter', 'Millimeter'),
           ('Microwave', 'Microwave'),
           ('Radio', 'Radio'),

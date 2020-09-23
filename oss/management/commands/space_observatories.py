@@ -13,6 +13,12 @@ def fetch_space_sites():
           'site_code': 'orb-earth-equ',
           'url': None,
         },
+        { 'name': 'Earth orbit',
+          'location': 'Space',
+          'orbit': 'Earth orbit',
+          'site_code': 'orb-earth',
+          'url': None,
+        },
         ]
 
     return sites
@@ -23,6 +29,7 @@ def fetch_space_installations():
 
     installations = []
     installations.append({'name': 'AGILE', 'type': 'Spacecraft', 'site_code': 'orb-earth-equ'})
+    installations.append({'name': 'Chandra', 'type': 'Spacecraft', 'site_code': 'orb-earth'})
 
     return installations
 
@@ -37,6 +44,13 @@ def fetch_space_telescopes():
             'installation': 'AGILE',
             'tel_code': 'orb-earth-equ.agile',
             'url': 'http://agile.rm.iasf.cnr.it/',
+            'operator': None},
+            {'name': 'Chandra',
+            'aperture': None,
+            'site_code': 'orb-earth',
+            'installation': 'Chandra',
+            'tel_code': 'orb-earth.chandra',
+            'url': 'https://chandra.harvard.edu/index.html',
             'operator': None},
                 ]
 
@@ -70,6 +84,38 @@ def fetch_space_instruments():
             'telescope': 'AGILE',
             'wavelength': 'Gamma ray',
             'capabilities': ['Scintillation detector'],
+            'url': None},
+            {'name': 'High Resolution Camera',
+            'site_code': 'orb-earth',
+            'tel_code': 'orb-earth.chandra',
+            'installation': 'Chandra',
+            'telescope': 'Chandra',
+            'wavelength': 'X-ray',
+            'capabilities': ['Imaging'],
+            'url': },
+            {'name': 'Advanced CCD Imaging Spectrometer',
+            'site_code': 'orb-earth',
+            'tel_code': 'orb-earth.chandra',
+            'installation': 'Chandra',
+            'telescope': 'Chandra',
+            'wavelength': 'X-ray',
+            'capabilities': ['Imaging', 'Spectrometry'],
+            'url': None},
+            {'name': 'High Resolution Transmission Grating Spectrometer',
+            'site_code': 'orb-earth',
+            'tel_code': 'orb-earth.chandra',
+            'installation': 'Chandra',
+            'telescope': 'Chandra',
+            'wavelength': 'X-ray',
+            'capabilities': ['Spectroscopy'],
+            'url': 'https://space.mit.edu/HETG/hetg_info.html'},
+            {'name': 'Low Energy Transmission Grating Spectrometer',
+            'site_code': 'orb-earth',
+            'tel_code': 'orb-earth.chandra',
+            'installation': 'Chandra',
+            'telescope': 'Chandra',
+            'wavelength': 'X-ray',
+            'capabilities': ['Spectroscopy'],
             'url': None},
     ]
 
