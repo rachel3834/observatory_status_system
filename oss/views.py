@@ -220,5 +220,7 @@ class FacilityStatusCreate(LoginRequiredMixin, FormView):
 ## ALMA
 ## ATCA twitter feed: https://twitter.com/jamie_atca_sss
 ## ATLAS dashboards: http://dashboard.fallingstar.com/dash/mlo.html
+## LT status
+## STELLA status: http://stella.aip.de/stella/status/status.php
 
 ## Status information in the past - how do I handle multiple status updates in one day?
