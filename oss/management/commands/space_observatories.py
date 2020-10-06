@@ -30,6 +30,7 @@ def fetch_space_installations():
     installations = []
     installations.append({'name': 'AGILE', 'type': 'Spacecraft', 'site_code': 'orb-earth-equ'})
     installations.append({'name': 'Chandra', 'type': 'Spacecraft', 'site_code': 'orb-earth'})
+    installations.append({'name': 'Fermi', 'type': 'Spacecraft', 'site_code': 'orb-earth'})
 
     return installations
 
@@ -51,6 +52,13 @@ def fetch_space_telescopes():
             'installation': 'Chandra',
             'tel_code': 'orb-earth.chandra',
             'url': 'https://chandra.harvard.edu/index.html',
+            'operator': None},
+            {'name': 'Fermi',
+            'aperture': None,
+            'site_code': 'orb-earth',
+            'installation': 'Fermi',
+            'tel_code': 'orb-earth.fermi',
+            'url': 'https://fermi.gsfc.nasa.gov/'',
             'operator': None},
                 ]
 

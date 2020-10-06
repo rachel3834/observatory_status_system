@@ -41,6 +41,7 @@ class Installation(models.Model):
         ('Dish', 'Dish'),
         ('Enclosure', 'Enclosure'),
         ('Array', 'Array'),
+        ('Gravitational Wave Detector', 'Gravitational Wave Detector')
         ('Spacecraft', 'Spacecraft'),
     )
     name = models.CharField("Installation Name", max_length=50)
