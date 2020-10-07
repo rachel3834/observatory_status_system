@@ -41,7 +41,8 @@ class Installation(models.Model):
         ('Dish', 'Dish'),
         ('Enclosure', 'Enclosure'),
         ('Array', 'Array'),
-        ('Gravitational Wave Detector', 'Gravitational Wave Detector')
+        ('Gravitational Wave Detector', 'Gravitational Wave Detector'),
+        ('Neutrino Detector', 'Neutrino Detector'),
         ('Spacecraft', 'Spacecraft'),
     )
     name = models.CharField("Installation Name", max_length=50)
@@ -75,6 +76,7 @@ class Instrument(models.Model):
           ('Optical', 'Optical'),
           ('IR', 'Infrared'),
           ('Optical/NIR', 'Optical/Infrared'),
+          ('UV/Optical/NIR', 'UV/Optical/Infrared'),
           ('Millimeter', 'Millimeter'),
           ('Microwave', 'Microwave'),
           ('Radio', 'Radio'),
