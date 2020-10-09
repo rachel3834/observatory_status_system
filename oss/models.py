@@ -77,6 +77,7 @@ class Instrument(models.Model):
           ('IR', 'Infrared'),
           ('Optical/NIR', 'Optical/Infrared'),
           ('UV/Optical/NIR', 'UV/Optical/Infrared'),
+          ('Submillimeter', 'Submillimeter'),
           ('Millimeter', 'Millimeter'),
           ('Microwave', 'Microwave'),
           ('Radio', 'Radio'),

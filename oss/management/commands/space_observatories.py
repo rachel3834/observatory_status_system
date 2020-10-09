@@ -39,6 +39,7 @@ def fetch_space_installations():
     installations.append({'name': 'Fermi', 'type': 'Spacecraft', 'site_code': 'orb-earth'})
     installations.append({'name': 'HST', 'type': 'Spacecraft', 'site_code': 'orb-earth-low'})
     installations.append({'name': 'INTEGRAL', 'type': 'Spacecraft', 'site_code': 'orb-earth'})
+    installations.append({'name': 'Insight-HXMT', 'type': 'Spacecraft', 'site_code': 'orb-earth'})
 
     return installations
 
@@ -81,6 +82,13 @@ def fetch_space_telescopes():
             'installation': 'INTEGRAL',
             'tel_code': 'orb-earth.integral',
             'url': 'https://sci.esa.int/web/integral',
+            'operator': None},
+            {'name': 'Insight Hard X-ray Modulation Telescope',
+            'aperture': None,
+            'site_code': 'orb-earth',
+            'installation': 'Insight',
+            'tel_code': 'orb-earth.insight',
+            'url': 'http://enghxmt.ihep.ac.cn/',
             'operator': None},
                 ]
 
@@ -219,6 +227,30 @@ def fetch_space_instruments():
             'wavelength': 'Optical',
             'capabilities': ['Imaging'],
             'url': 'https://sci.esa.int/web/integral/-/31175-instruments?section=omc'},
+            {'name': 'High enery X-ray Telescope (HE)',
+            'site_code': 'orb-earth',
+            'tel_code': 'orb-earth.insight',
+            'installation': 'Insight',
+            'telescope': 'Insight Hard X-ray Modulation Telescope',
+            'wavelength': 'X-ray',
+            'capabilities': ['X-ray Detector'],
+            'url': 'http://enghxmt.ihep.ac.cn/he.jhtml'},
+            {'name': 'Medium enery X-ray Telescope (ME)',
+            'site_code': 'orb-earth',
+            'tel_code': 'orb-earth.insight',
+            'installation': 'Insight',
+            'telescope': 'Insight Hard X-ray Modulation Telescope',
+            'wavelength': 'X-ray',
+            'capabilities': ['X-ray Detector'],
+            'url': 'http://enghxmt.ihep.ac.cn/me.jhtml'},
+            {'name': 'Low enery X-ray Telescope (LE)',
+            'site_code': 'orb-earth',
+            'tel_code': 'orb-earth.insight',
+            'installation': 'Insight',
+            'telescope': 'Insight Hard X-ray Modulation Telescope',
+            'wavelength': 'X-ray',
+            'capabilities': ['X-ray Detector'],
+            'url': 'http://enghxmt.ihep.ac.cn/le.jhtml'},
     ]
 
     return instruments
