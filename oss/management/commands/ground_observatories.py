@@ -819,6 +819,13 @@ def fetch_installations():
     installations.append({'name': 'KAIT', 'type': 'Dome', 'site_code': 'lick'})
     installations.append({'name': 'APF', 'type': 'Dome', 'site_code': 'lick'})
 
+    # Yerkes
+    installations.append({'name': '40inchReFr', 'type': 'Dome', 'site_code': 'yerkes'})
+    installations.append({'name': '41inchReFl', 'type': 'Dome', 'site_code': 'yerkes'})
+    installations.append({'name': '24inch', 'type': 'Dome', 'site_code': 'yerkes'})
+    installations.append({'name': '10inch', 'type': 'Dome', 'site_code': 'yerkes'})
+    installations.append({'name': '7inch', 'type': 'Dome', 'site_code': 'yerkes'})
+
     return installations
 
 def fetch_telescopes():
@@ -2038,6 +2045,42 @@ def fetch_telescopes():
             'installation': 'apf',
             'tel_code': 'lick.apf',
             'url': 'https://www.ucolick.org/main/science/telescopes/apf.html',
+            'operator': None},
+
+            {'name': '40inch Refractor',
+            'aperture': 1.0,
+            'site_code': 'yerkes',
+            'installation': '40inchReFr',
+            'tel_code': 'lick.1m0arefractor',
+            'url': None,
+            'operator': None},
+            {'name': '41inch Reflector',
+            'aperture': 1.04,
+            'site_code': 'yerkes',
+            'installation': '41inchReFl',
+            'tel_code': 'lick.1m0areflector',
+            'url': None,
+            'operator': None},
+            {'name': '24inch',
+            'aperture': 0.6,
+            'site_code': 'yerkes',
+            'installation': '24inch',
+            'tel_code': 'lick.0m6a',
+            'url': None,
+            'operator': None},
+            {'name': '10inch',
+            'aperture': 0.25,
+            'site_code': 'yerkes',
+            'installation': '10inch',
+            'tel_code': 'lick.0m25a',
+            'url': None,
+            'operator': None},
+            {'name': '7inch',
+            'aperture': 0.18,
+            'site_code': 'yerkes',
+            'installation': '7inch',
+            'tel_code': 'lick.0m18a',
+            'url': None,
             'operator': None},
             ]
 
