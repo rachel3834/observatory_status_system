@@ -498,6 +498,31 @@ def fetch_observatory_sites():
           'url': 'https://en.wikipedia.org/wiki/Ridge_A',
         },
 
+        { 'name': 'KM3NeT-Fr',
+          'location': 'Ground-based',
+          'latitude': '42:48:00.0N',
+          'longitude': '06:02:00.0E',
+          'altitude': -2450.0,
+          'site_code': 'km3fr',
+          'url': 'https://www.km3net.org/',
+        },
+        { 'name': 'KM3NeT-It',
+          'location': 'Ground-based',
+          'latitude': '36:16:00.0N',
+          'longitude': '16:06:00.0E',
+          'altitude': -3500.0,
+          'site_code': 'km3it',
+          'url': 'https://www.km3net.org/',
+        },
+        { 'name': 'KM3NeT-Gr',
+          'location': 'Ground-based',
+          'latitude': '36:33:00.0N',
+          'longitude': '21:30:00.0E',
+          'altitude': -4550.0,
+          'site_code': 'km3gr',
+          'url': 'https://www.km3net.org/',
+        },
+
         ]
 
         for site in sites:
@@ -600,6 +625,8 @@ def fetch_installations():
 
     installations.append({'name': 'Magellan-Baade', 'type': 'Dome', 'site_code': 'lco'})
     installations.append({'name': 'Magellan-Clay', 'type': 'Dome', 'site_code': 'lco'})
+    installations.append({'name': 'IdP', 'type': 'Dome', 'site_code': 'lco'})
+    installations.append({'name': 'Swope', 'type': 'Dome', 'site_code': 'lco'})
 
     # Mt. Wilson
     installations.append({'name': '60inch', 'type': 'Dome', 'site_code': 'mwil'})
@@ -748,6 +775,10 @@ def fetch_installations():
 
     # Ridge A
     installations.append({'name': 'HEATT', 'type': 'Dome', 'site_code': 'ridgea'})
+
+    installations.append({'name': 'KM3NeT-Fr', 'type': 'Array', 'site_code': 'km3fr'})
+    installations.append({'name': 'KM3NeT-It', 'type': 'Array', 'site_code': 'km3it'})
+    installations.append({'name': 'KM3NeT-Gr', 'type': 'Array', 'site_code': 'km3gr'})
 
     return installations
 
@@ -988,6 +1019,20 @@ def fetch_telescopes():
             'installation': 'Magellan-Clay',
             'tel_code': 'lco.magc',
             'url': 'https://www.as.arizona.edu/magellan-65m-telescopes',
+            'operator': None},
+            {'name': 'Irenee du Pont Telescope',
+            'aperture': 2.5m,
+            'site_code': 'lco',
+            'installation': 'IdP',
+            'tel_code': 'lco.idp',
+            'url': 'http://www.lco.cl/?page_id=235',
+            'operator': None},
+            {'name': 'Henrietta Telescope',
+            'aperture': 1.0m,
+            'site_code': 'lco',
+            'installation': 'Swope',
+            'tel_code': 'lco.swope',
+            'url': 'http://www.lco.cl/?page_id=239',
             'operator': None},
 
             # Mt. Wilson
@@ -3550,6 +3595,64 @@ def fetch_instruments():
         'wavelength': 'Optical',
         'capabilities': ['Spectroscopy'],
         'url': 'https://vaticanobservatory.org/VATT/the-telescope-instruments/vatt-instrumentation-and-computers'},
+
+
+        {'name': 'CCD',
+        'site_code': 'lco',
+        'tel_code': 'lco.swope',
+        'installation': 'Swope',
+        'telescope': 'Henrietta Swope Telescope',
+        'wavelength': 'Optical',
+        'capabilities': ['Imaging'],
+        'url': 'http://www.lco.cl/?epkb_post_type_1=ccd'},
+        {'name': 'Direct CCD Camera',
+        'site_code': 'lco',
+        'tel_code': 'lco.IdP',
+        'installation': 'IdP',
+        'telescope': 'Irenee du Pont Telescope',
+        'wavelength': 'Optical',
+        'capabilities': ['Imaging'],
+        'url': 'http://www.lco.cl/?epkb_post_type_1=direct-ccd-camera'},
+        {'name': 'WFCCD',
+        'site_code': 'lco',
+        'tel_code': 'lco.IdP',
+        'installation': 'IdP',
+        'telescope': 'Irenee du Pont Telescope',
+        'wavelength': 'Optical',
+        'capabilities': ['Wide-field Imaging', 'Mutli-object Spectroscopy'],
+        'url': 'http://www.lco.cl/?epkb_post_type_1=wfccd'},
+        {'name': 'Boller & Chivens Spectrograph',
+        'site_code': 'lco',
+        'tel_code': 'lco.IdP',
+        'installation': 'IdP',
+        'telescope': 'Irenee du Pont Telescope',
+        'wavelength': 'Optical',
+        'capabilities': ['Long-slit Spectroscopy'],
+        'url': 'http://www.lco.cl/?epkb_post_type_1=boller-chivens-spectrograph-2'},
+        {'name': 'Echelle Spectrograph',
+        'site_code': 'lco',
+        'tel_code': 'lco.IdP',
+        'installation': 'IdP',
+        'telescope': 'Irenee du Pont Telescope',
+        'wavelength': 'Optical',
+        'capabilities': ['Echelle Spectroscopy'],
+        'url': 'http://www.lco.cl/?epkb_post_type_1=echelle'},
+        {'name': 'CAPSCam',
+        'site_code': 'lco',
+        'tel_code': 'lco.IdP',
+        'installation': 'IdP',
+        'telescope': 'Irenee du Pont Telescope',
+        'wavelength': 'Optical',
+        'capabilities': ['Imaging'],
+        'url': 'http://www.lco.cl/?epkb_post_type_1=capscam'},
+        {'name': 'RetroCam',
+        'site_code': 'lco',
+        'tel_code': 'lco.IdP',
+        'installation': 'IdP',
+        'telescope': 'Irenee du Pont Telescope',
+        'wavelength': 'Infrared',
+        'capabilities': ['Imaging'],
+        'url': 'http://www.lco.cl/?epkb_post_type_1=retrocam'},
         ]
 
     return instruments
