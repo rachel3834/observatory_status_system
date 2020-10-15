@@ -25,6 +25,12 @@ def fetch_space_sites():
           'site_code': 'orb-earth-low',
           'url': None,
         },
+        { 'name': 'International Space Station (ISS)',
+          'location': 'Space',
+          'orbit': 'Low Earth Orbit',
+          'site_code': 'iss',
+          'url': 'https://www.nasa.gov/mission_pages/station/main/index.html',
+        },
         ]
 
     return sites
@@ -40,6 +46,7 @@ def fetch_space_installations():
     installations.append({'name': 'HST', 'type': 'Spacecraft', 'site_code': 'orb-earth-low'})
     installations.append({'name': 'INTEGRAL', 'type': 'Spacecraft', 'site_code': 'orb-earth'})
     installations.append({'name': 'Insight-HXMT', 'type': 'Spacecraft', 'site_code': 'orb-earth'})
+    installations.append({'name': 'MAXI', 'type': 'Spacecraft', 'site_code': 'iss'})
 
     return installations
 
@@ -89,6 +96,13 @@ def fetch_space_telescopes():
             'installation': 'Insight',
             'tel_code': 'orb-earth.insight',
             'url': 'http://enghxmt.ihep.ac.cn/',
+            'operator': None},
+            {'name': 'Monitor of All-sky X-ray Image (MAXI)',
+            'aperture': None,
+            'site_code': 'iss',
+            'installation': 'MAXI',
+            'tel_code': 'iss.maxi',
+            'url': 'http://maxi.riken.jp/top/index.html',
             'operator': None},
                 ]
 
