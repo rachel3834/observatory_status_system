@@ -547,6 +547,30 @@ def fetch_observatory_sites():
           'site_code': 'lick',
           'url': 'https://en.wikipedia.org/wiki/Yerkes_Observatory',
         },
+        { 'name': 'Carnarvon Observatory',
+          'location': 'Ground-based',
+          'latitude': '24:52:02.1S',
+          'longitude': '113:42:13.5E',
+          'altitude': None,
+          'site_code': 'car',
+          'url': None,
+        },
+        { 'name': 'Narrabri Observatory',
+          'location': 'Ground-based',
+          'latitude': '30:18:35.4S',
+          'longitude': '149:33:55.1E',
+          'altitude': None,
+          'site_code': 'narr',
+          'url': None,
+        },
+        { 'name': 'Winer Observatory',
+          'location': 'Ground-based',
+          'latitude': '31:39:56.08N',
+          'longitude': '110:36:06.42W',
+          'altitude': 1515.7,
+          'site_code': 'wine',
+          'url': 'https://www.winer.org/',
+        },
         ]
 
         for site in sites:
@@ -563,6 +587,7 @@ def fetch_installations():
 
     # Siding Spring, Australia
     installations.append({'name': 'AAT Dome', 'type': 'Dome', 'site_code': 'coj'})
+    installations.append({'name': 'KMTNet', 'type': 'Dome', 'site_code': 'coj'})
 
     # Haleakala
     installations.append({'name': 'DKIST', 'type': 'Dome', 'site_code': 'ogg'})
@@ -651,10 +676,12 @@ def fetch_installations():
     installations.append({'name': 'Magellan-Clay', 'type': 'Dome', 'site_code': 'lco'})
     installations.append({'name': 'IdP', 'type': 'Dome', 'site_code': 'lco'})
     installations.append({'name': 'Swope', 'type': 'Dome', 'site_code': 'lco'})
+    installations.append({'name': 'BiSON', 'type': 'Dome', 'site_code': 'lco'})
 
     # Mt. Wilson
     installations.append({'name': '60inch', 'type': 'Dome', 'site_code': 'mwil'})
     installations.append({'name': '100inch', 'type': 'Dome', 'site_code': 'mwil'})
+    installations.append({'name': 'BiSON', 'type': 'Dome', 'site_code': 'mwil'})
 
     # Cherenkov Telescope Arrays
     installations.append({'name': 'CTA', 'type': 'Array', 'site_code': 'para'})
@@ -734,6 +761,7 @@ def fetch_installations():
     installations.append({'name': 'IAC80', 'type': 'Dome', 'site_code': 'tei'})
     installations.append({'name': 'VTT', 'type': 'Dome', 'site_code': 'tei'})
     installations.append({'name': 'MONS', 'type': 'Dome', 'site_code': 'tei'})
+    installations.append({'name': 'BiSON', 'type': 'Dome', 'site_code': 'tei'})
 
     # FLWO
     installations.append({'name': 'MMT', 'type': 'Dome', 'site_code': 'flwo'})
@@ -756,6 +784,8 @@ def fetch_installations():
     installations.append({'name': 'SMARTS 1.3m', 'type': 'Dome', 'site_code': 'lsc'})
     installations.append({'name': 'SMARTS 1.0m', 'type': 'Dome', 'site_code': 'lsc'})
     installations.append({'name': 'SMARTS 0.9m', 'type': 'Dome', 'site_code': 'lsc'})
+    installations.append({'name': 'ASAS-SN', 'type': 'Dome', 'site_code': 'lsc'})
+    installations.append({'name': 'KMTNet', 'type': 'Dome', 'site_code': 'lsc'})
 
     # GONG
     installations.append({'name': 'GONG', 'type': 'Dome', 'site_code': 'bbso'})
@@ -780,6 +810,8 @@ def fetch_installations():
     installations.append({'name': 'OST', 'type': 'Dome', 'site_code': 'elp'})
     installations.append({'name': '0.8m', 'type': 'Dome', 'site_code': 'elp'})
     installations.append({'name': '0.9m', 'type': 'Dome', 'site_code': 'elp'})
+    installations.append({'name': 'MONET', 'type': 'Dome', 'site_code': 'elp'})
+    installations.append({'name': 'ASASSN', 'type': 'Dome', 'site_code': 'elp'})
 
     installations.append({'name': 'IceCube', 'type': 'Neutrino Detector', 'site_code': 'icec'})
     installations.append({'name': '30m', 'type': 'Dish', 'site_code': 'pvel'})
@@ -826,6 +858,28 @@ def fetch_installations():
     installations.append({'name': '10inch', 'type': 'Dome', 'site_code': 'yerkes'})
     installations.append({'name': '7inch', 'type': 'Dome', 'site_code': 'yerkes'})
 
+    # SAAO
+    installations.append({'name': 'MeerLICHT', 'type': 'Dome', 'site_code': 'cpt'})
+    installations.append({'name': 'MeerKAT', 'type': 'Dish', 'site_code': 'cpt'})
+    installations.append({'name': 'SALT', 'type': 'Dome', 'site_code': 'cpt'})
+    installations.append({'name': '1.0m', 'type': 'Dome', 'site_code': 'cpt'})
+    installations.append({'name': '1.9m', 'type': 'Dome', 'site_code': 'cpt'})
+    installations.append({'name': 'LESEDI', 'type': 'Dome', 'site_code': 'cpt'})
+    installations.append({'name': 'BiSON', 'type': 'Dome', 'site_code': 'cpt'})
+    installations.append({'name': 'ASASSN', 'type': 'Dome', 'site_code': 'cpt'})
+    #installations.append({'name': 'ATLAS', 'type': 'Dome', 'site_code': 'cpt'})
+    installations.append({'name': 'MONET', 'type': 'Dome', 'site_code': 'cpt'})
+    installations.append({'name': 'Solaris', 'type': 'Dome', 'site_code': 'cpt'})
+    installations.append({'name': 'IRSF', 'type': 'Dome', 'site_code': 'cpt'})
+    installations.append({'name': 'XM', 'type': 'Dome', 'site_code': 'cpt'})
+    installations.append({'name': 'KMTNet', 'type': 'Dome', 'site_code': 'cpt'})
+    installations.append({'name': 'KELT', 'type': 'Dome', 'site_code': 'cpt'})
+
+    installations.append({'name': 'BiSON', 'type': 'Dome', 'site_code': 'car'})
+    installations.append({'name': 'BiSON', 'type': 'Dome', 'site_code': 'narr'})
+
+    installations.append({'name': 'KELT', 'type': 'Dome', 'site_code': 'wine'})
+
     return installations
 
 def fetch_telescopes():
@@ -840,6 +894,13 @@ def fetch_telescopes():
             'installation': 'AAT Dome',
             'tel_code': 'coj.aat.4m0a',
             'url': 'https://www.aao.gov.au/about-us/AAT',
+            'operator': None},
+            {'name': 'KMTNet',
+            'aperture': 2.0,
+            'site_code': 'coj',
+            'installation': 'KMTNet',
+            'tel_code': 'coj.kmtnet',
+            'url': 'https://kmtnet.kasi.re.kr/kmtnet-eng/',
             'operator': None},
 
             # Llano de Chajnantor, Atacama, Chile
@@ -1080,6 +1141,13 @@ def fetch_telescopes():
             'tel_code': 'lco.swope',
             'url': 'http://www.lco.cl/?page_id=239',
             'operator': None},
+            {'name': 'BiSON',
+            'aperture': None,
+            'site_code': 'lco',
+            'installation': 'BiSON',
+            'tel_code': 'lco.bison',
+            'url': 'http://bison.ph.bham.ac.uk/',
+            'operator': None},
 
             # Mt. Wilson
             {'name': 'Mt. Wilson 60inch',
@@ -1143,6 +1211,13 @@ def fetch_telescopes():
             'installation': 'DKIST',
             'tel_code': 'ogg.dkist',
             'url': 'https://dkist.nso.edu/',
+            'operator': None},
+            {'name': 'ASAS-SN',
+            'aperture': 0.14,
+            'site_code': 'ogg',
+            'installation': 'FTN',
+            'tel_code': 'ogg.asassn',
+            'url': 'http://www.astronomy.ohio-state.edu/~assassin/index.shtml',
             'operator': None},
 
             # Effelsberg
@@ -1541,6 +1616,13 @@ def fetch_telescopes():
             'tel_code': 'tei.vtt',
             'url': 'http://www.iac.es/es/observatorios-de-canarias/telescopios-y-experimentos/mons',
             'operator': None},
+            {'name': 'BiSON',
+            'aperture': None,
+            'site_code': 'tei',
+            'installation': 'BiSON',
+            'tel_code': 'tei.bison',
+            'url': 'http://bison.ph.bham.ac.uk/',
+            'operator': None},
 
             {'name': 'Multiple Mirror Telescope',
             'aperture': 6.5,
@@ -1617,6 +1699,13 @@ def fetch_telescopes():
             'tel_code': 'lsc.smarts0m9a',
             'url': 'http://www.ctio.noao.edu/noao/content/SMARTS-09-m-Telescope',
             'operator': None},
+            {'name': 'KMTNet',
+            'aperture': 2.0,
+            'site_code': 'lsc',
+            'installation': 'KMTNet',
+            'tel_code': 'lsc.kmtnet',
+            'url': 'https://kmtnet.kasi.re.kr/kmtnet-eng/',
+            'operator': None},
 
 
             {'name': 'Giant Metrewave Radio Telescope',
@@ -1689,6 +1778,13 @@ def fetch_telescopes():
             'installation': '0.9m',
             'tel_code': 'elp.0m9a',
             'url': 'https://mcdonaldobservatory.org/research/telescopes/09-meter-telescope',
+            'operator': None},
+            {'name': 'Monitoring Network of Telescopes-North (MONET-N)',
+            'aperture': 1.2,
+            'site_code': 'elp',
+            'installation': 'MONET',
+            'tel_code': 'elp.monet',
+            'url': 'https://monet.uni-goettingen.de/',
             'operator': None},
 
             {'name': 'Imaging Atmospheric Cherenkov Telescopes',
@@ -2081,6 +2177,136 @@ def fetch_telescopes():
             'installation': '7inch',
             'tel_code': 'lick.0m18a',
             'url': None,
+            'operator': None},
+
+            # SAAO
+            {'name': 'Southern African Large Telescope (SALT)',
+            'aperture': 11.0,
+            'site_code': 'cpt',
+            'installation': 'SALT',
+            'tel_code': 'cpt.salt',
+            'url': 'https://www.salt.ac.za/',
+            'operator': None},
+            {'name': '1.9m Telescope',
+            'aperture': 1.9,
+            'site_code': 'cpt',
+            'installation': '1.9m',
+            'tel_code': 'cpt.1m9a',
+            'url': 'https://www.saao.ac.za/explore/our-telescopes/one-point-nine/',
+            'operator': None},
+            {'name': '1.0m Telescope',
+            'aperture': 1.0,
+            'site_code': 'cpt',
+            'installation': '1.0m',
+            'tel_code': 'cpt.1m0a',
+            'url': 'https://www.saao.ac.za/explore/our-telescopes/one-metre/',
+            'operator': None},
+            {'name': 'Lesedi Telescope',
+            'aperture': 1.0,
+            'site_code': 'cpt',
+            'installation': 'LESEDI',
+            'tel_code': 'cpt.lesedi',
+            'url': 'https://www.saao.ac.za/explore/our-telescopes/lesedi/',
+            'operator': None},
+            {'name': 'MeerLICHT',
+            'aperture': 0.65,
+            'site_code': 'cpt',
+            'installation': 'MeerLICHT',
+            'tel_code': 'cpt.meerlicht',
+            'url': 'http://www.meerlicht.uct.ac.za/mt/project',
+            'operator': None},
+            {'name': 'BiSON',
+            'aperture': None,
+            'site_code': 'cpt',
+            'installation': 'BiSON',
+            'tel_code': 'cpt.bison',
+            'url': 'http://bison.ph.bham.ac.uk/',
+            'operator': None},
+            {'name': 'ASAS-SN',
+            'aperture': 0.14,
+            'site_code': 'cpt',
+            'installation': 'ASASSN',
+            'tel_code': 'cpt.asassn',
+            'url': 'https://asas-sn.osu.edu/',
+            'operator': None},
+            {'name': 'ATLAS',
+            'aperture': 0.5,
+            'site_code': 'cpt',
+            'installation': 'ATLAS',
+            'tel_code': 'cpt.atlas',
+            'url': 'https://atlas.fallingstar.com/home.php',
+            'operator': None},
+            {'name': 'Monitoring Network of Telescopes-South (MONET-S)',
+            'aperture': 1.2,
+            'site_code': 'cpt',
+            'installation': 'MONET',
+            'tel_code': 'cpt.monet',
+            'url': 'https://monet.uni-goettingen.de/',
+            'operator': None},
+            {'name': 'Solaris 1',
+            'aperture': 0.5,
+            'site_code': 'cpt',
+            'installation': 'MONET',
+            'tel_code': 'cpt.solaris1',
+            'url': 'http://projektsolaris.pl/',
+            'operator': None},
+            {'name': 'Solaris 2',
+            'aperture': 0.5,
+            'site_code': 'cpt',
+            'installation': 'MONET',
+            'tel_code': 'cpt.solaris2',
+            'url': 'http://projektsolaris.pl/',
+            'operator': None},
+            {'name': 'Infrared Survey Facility (IRSF)',
+            'aperture': 1.4,
+            'site_code': 'cpt',
+            'installation': 'IRSF',
+            'tel_code': 'cpt.irsf',
+            'url': 'http://www-ir.u.phys.nagoya-u.ac.jp/~irsf/index_e.html',
+            'operator': None},
+            {'name': 'KMTNet',
+            'aperture': 2.0,
+            'site_code': 'cpt',
+            'installation': 'KMTNet',
+            'tel_code': 'cpt.kmtnet',
+            'url': 'https://kmtnet.kasi.re.kr/kmtnet-eng/',
+            'operator': None},
+            {'name': 'Kilodegree Extremely Little Telescope (KELT)',
+            'aperture': 0.3004359452941297,
+            'site_code': 'cpt',
+            'installation': 'KELT',
+            'tel_code': 'cpt.kelt',
+            'url': 'https://keltsurvey.org/',
+            'operator': None},
+
+            {'name': 'Kilodegree Extremely Little Telescope (KELT)',
+            'aperture': 0.3004359452941297,
+            'site_code': 'wine',
+            'installation': 'KELT',
+            'tel_code': 'wine.kelt',
+            'url': 'https://keltsurvey.org/',
+            'operator': None},
+            {'name': 'DEMONEX',
+            'aperture': 0.508,
+            'site_code': 'wine',
+            'installation': 'DEMONEX',
+            'tel_code': 'wine.demonex',
+            'url': 'http://www.astronomy.ohio-state.edu/~jdeast/demonex/index.html',
+            'operator': None},
+
+            {'name': 'BiSON',
+            'aperture': None,
+            'site_code': 'car',
+            'installation': 'BiSON',
+            'tel_code': 'car.bison',
+            'url': 'http://bison.ph.bham.ac.uk/',
+            'operator': None},
+            {'name': 'BiSON',
+            'aperture': None,
+            'site_code': 'narr',
+            'installation': 'BiSON',
+            'tel_code': 'narr.bison',
+            'url': 'http://bison.ph.bham.ac.uk/',
             'operator': None},
             ]
 
@@ -2485,6 +2711,13 @@ def fetch_instruments():
         'wavelength': 'Optical',
         'capabilities': ['Interferometric spectroscopy', 'Interferometric polarimetry'],
         'url': 'http://www.chara.gsu.edu/instrumentation/vega'},
+        {'name': 'BiSON',
+        'aperture': None,
+        'site_code': 'mwil',
+        'installation': 'BiSON',
+        'tel_code': 'mwil.bison',
+        'url': 'http://bison.ph.bham.ac.uk/',
+        'operator': None},
 
         # Dominion Astrophysical observatory
         {'name': 'CCD Camera',
@@ -3936,6 +4169,89 @@ def fetch_instruments():
         'wavelength': 'Optical',
         'capabilities': ['Spectroscopy'],
         'url': 'https://www.ucolick.org/main/science/telescopes/nickel.html'},
+
+        {'name': 'RSS',
+        'site_code': 'cpt',
+        'tel_code': 'cpt.salt',
+        'installation': 'SALT',
+        'telescope': 'Southern Africa Large Telescope',
+        'wavelength': 'Optical',
+        'capabilities': ['Long-slit Spectroscopy', 'Multi-object Spectroscopy'],
+        'url': 'https://astronomers.salt.ac.za/instruments/rss/'},
+        {'name': 'SALTICAM',
+        'site_code': 'cpt',
+        'tel_code': 'cpt.salt',
+        'installation': 'SALT',
+        'telescope': 'Southern Africa Large Telescope',
+        'wavelength': 'Optical',
+        'capabilities': ['Imaging'],
+        'url': 'https://astronomers.salt.ac.za/instruments/salticam/'},
+        {'name': 'HRS',
+        'site_code': 'cpt',
+        'tel_code': 'cpt.salt',
+        'installation': 'SALT',
+        'telescope': 'Southern Africa Large Telescope',
+        'wavelength': 'Optical',
+        'capabilities': ['Echelle Spectroscopy'],
+        'url': 'https://astronomers.salt.ac.za/instruments/hrs/'},
+        {'name': 'GIRAFFE',
+        'site_code': 'cpt',
+        'tel_code': 'cpt.1m9a',
+        'installation': '1.9m',
+        'telescope': '1.9m Telescope',
+        'wavelength': 'Optical',
+        'capabilities': ['Echelle Spectroscopy'],
+        'url': 'https://www.saao.ac.za/astronomers/1-9m/'},
+        {'name': 'HIPPO',
+        'site_code': 'cpt',
+        'tel_code': 'cpt.1m9a',
+        'installation': '1.9m',
+        'telescope': '1.9m Telescope',
+        'wavelength': 'Optical',
+        'capabilities': ['Photo-polarimetry'],
+        'url': 'https://www.saao.ac.za/astronomers/hippo/'},
+        {'name': 'SHOC',
+        'site_code': 'cpt',
+        'tel_code': 'cpt.1m9a',
+        'installation': '1.9m',
+        'telescope': '1.9m Telescope',
+        'wavelength': 'Optical',
+        'capabilities': ['High-speed Imaging'],
+        'url': 'https://www.saao.ac.za/astronomers/shoc/'},
+        {'name': 'SHOC',
+        'site_code': 'cpt',
+        'tel_code': 'cpt.1m0a',
+        'installation': '1.0m',
+        'telescope': '1.0m Telescope',
+        'wavelength': 'Optical',
+        'capabilities': ['High-speed Imaging'],
+        'url': 'https://www.saao.ac.za/astronomers/shoc/'},
+        {'name': 'STE3/STE4',
+        'site_code': 'cpt',
+        'tel_code': 'cpt.1m0a',
+        'installation': '1.0m',
+        'telescope': '1.0m Telescope',
+        'wavelength': 'Optical',
+        'capabilities': ['Imaging'],
+        'url': 'https://www.saao.ac.za/astronomers/ste3-ste4/'},
+        {'name': 'SHOC',
+        'site_code': 'cpt',
+        'tel_code': 'cpt.lesedi',
+        'installation': 'LESEDI',
+        'telescope': 'Lesedi Telescope',
+        'wavelength': 'Optical',
+        'capabilities': ['High-speed Imaging'],
+        'url': 'https://www.saao.ac.za/astronomers/shoc/'},
+
+        {'name': 'SIRIUS',
+        'site_code': 'cpt',
+        'tel_code': 'cpt.irsf',
+        'installation': 'IRSF',
+        'telescope': 'Infrared Survey Facility',
+        'wavelength': 'Infrared',
+        'capabilities': ['Multi-band Imaging'],
+        'url': 'http://www-ir.u.phys.nagoya-u.ac.jp/~irsf/sirius/index_e.html'},
+
         ]
 
     return instruments

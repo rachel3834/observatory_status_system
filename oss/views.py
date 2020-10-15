@@ -222,5 +222,6 @@ class FacilityStatusCreate(LoginRequiredMixin, FormView):
 ## ATLAS dashboards: http://dashboard.fallingstar.com/dash/mlo.html
 ## LT status
 ## STELLA status: http://stella.aip.de/stella/status/status.php
+## SALT https://astronomers.salt.ac.za/status/
 
 ## Status information in the past - how do I handle multiple status updates in one day?
