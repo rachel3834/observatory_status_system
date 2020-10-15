@@ -479,6 +479,25 @@ def fetch_observatory_sites():
           'site_code': 'brew',
           'url': None,
         },
+
+        { 'name': 'Las Campanas Observatory',
+          'location': 'Ground-based',
+          'latitude': '29:10:55.2S',
+          'longitude': '70:41:29.4W',
+          'altitude': 2282.0,
+          'site_code': 'lco',
+          'url': 'http://www.lco.cl/',
+        },
+
+        { 'name': 'Ridge A',
+          'location': 'Ground-based',
+          'latitude': '81:30:00.0S',
+          'longitude': '73:30:00.0E',
+          'altitude': 4053.0,
+          'site_code': 'ridgea',
+          'url': 'https://en.wikipedia.org/wiki/Ridge_A',
+        },
+
         ]
 
         for site in sites:
@@ -532,6 +551,7 @@ def fetch_installations():
 
     # Mt. Graham
     installations.append({'name': 'Submillimeter Dish', 'type': 'Dish', 'site_code': 'mgio'})
+    installations.append({'name': 'VATT', 'type': 'Dome', 'site_code': 'mgio'})
 
     # Paul Wild observatory
     installations.append({'name': 'Australia Telescope Compact Array', 'type': 'Array', 'site_code': 'pwo'})
@@ -574,6 +594,12 @@ def fetch_installations():
     # Catalina Sky Survey
     installations.append({'name': 'CSS', 'type': 'Dome', 'site_code': 'mbig'})
     installations.append({'name': 'MLS', 'type': 'Dome', 'site_code': 'mlem'})
+
+    installations.append({'name': 'Kuiper', 'type': 'Dome', 'site_code': 'mbig'})
+    installations.append({'name': 'LBT', 'type': 'Dome', 'site_code': 'mbig'})
+
+    installations.append({'name': 'Magellan-Baade', 'type': 'Dome', 'site_code': 'lco'})
+    installations.append({'name': 'Magellan-Clay', 'type': 'Dome', 'site_code': 'lco'})
 
     # Mt. Wilson
     installations.append({'name': '60inch', 'type': 'Dome', 'site_code': 'mwil'})
@@ -720,6 +746,9 @@ def fetch_installations():
     installations.append({'name': 'VLBA', 'type': 'Dish', 'site_code': 'owens'})
     installations.append({'name': 'VLBA', 'type': 'Dish', 'site_code': 'brew'})
 
+    # Ridge A
+    installations.append({'name': 'HEATT', 'type': 'Dome', 'site_code': 'ridgea'})
+
     return installations
 
 def fetch_telescopes():
@@ -793,6 +822,13 @@ def fetch_telescopes():
             'installation': 'Submillimeter Dish',
             'tel_code': 'mgio.smt',
             'url': 'https://www.as.arizona.edu/arizona-radio-observatory',
+            'operator': None},
+            {'name': 'Vatican Advanced Technology Telescope',
+            'aperture': 1.8,
+            'site_code': 'mgio',
+            'installation': 'VATT',
+            'tel_code': 'mgio.vatt',
+            'url': 'https://vaticanobservatory.org/VATT/index.php',
             'operator': None},
 
             # Paul Wild Observatory, Australia
@@ -922,6 +958,36 @@ def fetch_telescopes():
             'installation': 'MLS',
             'tel_code': 'mbig.mls',
             'url': 'https://www.as.arizona.edu/catalina-sky-survey-telelscopes-mts-bigelow-and-lemmon',
+            'operator': None},
+
+
+            {'name': 'Kuiper 61inch Telescope',
+            'aperture': 1.54,
+            'site_code': 'mbig',
+            'installation': 'Kuiper',
+            'tel_code': 'mbig.kuiper',
+            'url': 'https://www.as.arizona.edu/kuiper-61-telescope',
+            'operator': None},
+            {'name': 'Large Binocular Telescope',
+            'aperture': 8.4m,
+            'site_code': 'mbig',
+            'installation': 'LBT',
+            'tel_code': 'mbig.lbt',
+            'url': 'https://www.as.arizona.edu/large-binocular-telescope',
+            'operator': None},
+            {'name': 'Magellan Telescope Baade',
+            'aperture': 6.5m,
+            'site_code': 'lco',
+            'installation': 'Magellan-Baade',
+            'tel_code': 'lco.magb',
+            'url': 'https://www.as.arizona.edu/magellan-65m-telescopes',
+            'operator': None},
+            {'name': 'Magellan Telescope Clay',
+            'aperture': 6.5m,
+            'site_code': 'lco',
+            'installation': 'Magellan-Clay',
+            'tel_code': 'lco.magc',
+            'url': 'https://www.as.arizona.edu/magellan-65m-telescopes',
             'operator': None},
 
             # Mt. Wilson
@@ -1801,6 +1867,14 @@ def fetch_telescopes():
             'installation': 'VLBA',
             'tel_code': 'brew.vlba',
             'url': 'https://public.nrao.edu/telescopes/vlba/',
+            'operator': None},
+
+            {'name': 'High Elevation Antartic Terahertz Telescope',
+            'aperture': 0.6,
+            'site_code': 'ridgea',
+            'installation': 'HEATT',
+            'tel_code': 'ridgea.heatt',
+            'url': 'https://www.as.arizona.edu/high-elevation-antarctic-terahertz-telescope-0',
             'operator': None},
             ]
 
@@ -3344,6 +3418,138 @@ def fetch_instruments():
         'wavelength': 'Optical',
         'capabilities': ['Imaging'],
         'url': 'http://rct.wku.edu/wordpress/'},
+
+        {'name': 'Large Binocular cameras',
+        'site_code': 'mbig',
+        'tel_code': 'mbig.lbt',
+        'installation': 'LBT',
+        'telescope': 'Large Binocular Telescope',
+        'wavelength': 'Optical',
+        'capabilities': ['Imaging'],
+        'url': 'https://www.lbto.org/instruments.html'},
+        {'name': 'Multi-Object Double Spectrograph (MODS1 & 2)',
+        'site_code': 'mbig',
+        'tel_code': 'mbig.lbt',
+        'installation': 'LBT',
+        'telescope': 'Large Binocular Telescope',
+        'wavelength': 'Optical',
+        'capabilities': ['Multi-object Spectroscopy', 'Imaging'],
+        'url': 'https://www.lbto.org/instruments.html'},
+        {'name': 'LUCI 1 & 2',
+        'site_code': 'mbig',
+        'tel_code': 'mbig.lbt',
+        'installation': 'LBT',
+        'telescope': 'Large Binocular Telescope',
+        'wavelength': 'Infrared',
+        'capabilities': ['Multi-slit Spectroscopy', 'Long-slit Spectroscopy', 'Imaging'],
+        'url': 'https://www.lbto.org/instruments.html'},
+        {'name': 'LMIRcam',
+        'site_code': 'mbig',
+        'tel_code': 'mbig.lbt',
+        'installation': 'LBT',
+        'telescope': 'Large Binocular Telescope',
+        'wavelength': 'Infrared',
+        'capabilities': ['Imaging', 'Coronography'],
+        'url': 'https://www.lbto.org/instruments.html'},
+        {'name': 'PEPSI',
+        'site_code': 'mbig',
+        'tel_code': 'mbig.lbt',
+        'installation': 'LBT',
+        'telescope': 'Large Binocular Telescope',
+        'wavelength': 'Optical',
+        'capabilities': ['Spectroscopy', 'Polarimetry'],
+        'url': 'https://www.lbto.org/instruments.html'},
+
+
+        {'name': 'IMACS',
+        'site_code': 'lco',
+        'tel_code': 'lco.magb',
+        'installation': 'Magellan-Baade',
+        'telescope': 'Magellan Telescope Baade',
+        'wavelength': 'Optical',
+        'capabilities': ['Wide-field Imaging', 'Multi-object Spectroscopy'],
+        'url': 'http://www.lco.cl/?epkb_post_type_1=index'},
+        {'name': 'FourStar',
+        'site_code': 'lco',
+        'tel_code': 'lco.magb',
+        'installation': 'Magellan-Baade',
+        'telescope': 'Magellan Telescope Baade',
+        'wavelength': 'Infrared',
+        'capabilities': ['Wide-field Imaging'],
+        'url': 'http://www.lco.cl/?epkb_post_type_1=fourstar'},
+        {'name': 'FIRE',
+        'site_code': 'lco',
+        'tel_code': 'lco.magb',
+        'installation': 'Magellan-Baade',
+        'telescope': 'Magellan Telescope Baade',
+        'wavelength': 'Infrared',
+        'capabilities': ['Echellette Spectroscopy'],
+        'url': 'http://www.lco.cl/?epkb_post_type_1=fire'},
+        {'name': 'MagE',
+        'site_code': 'lco',
+        'tel_code': 'lco.magb',
+        'installation': 'Magellan-Baade',
+        'telescope': 'Magellan Telescope Baade',
+        'wavelength': 'Optical',
+        'capabilities': ['Echellette Spectroscopy'],
+        'url': 'http://www.lco.cl/?epkb_post_type_1=mage'},
+        {'name': 'Magellan Inamori Kyocera Echelle (MIKE)',
+        'site_code': 'lco',
+        'tel_code': 'lco.magc',
+        'installation': 'Magellan-Clay',
+        'telescope': 'Magellan Telescope Clay',
+        'wavelength': 'Optical',
+        'capabilities': ['Echelle Spectroscopy'],
+        'url': 'http://www.lco.cl/?epkb_post_type_1=mike'},
+        {'name': 'Low Dispersion Survey Spectrograph (LDSS3)',
+        'site_code': 'lco',
+        'tel_code': 'lco.magc',
+        'installation': 'Magellan-Clay',
+        'telescope': 'Magellan Telescope Clay',
+        'wavelength': 'Optical',
+        'capabilities': ['Multi-slit Spectroscopy'],
+        'url': 'http://www.lco.cl/?epkb_post_type_1=index-2'},
+        {'name': 'Megacam',
+        'site_code': 'lco',
+        'tel_code': 'lco.magc',
+        'installation': 'Magellan-Clay',
+        'telescope': 'Magellan Telescope Clay',
+        'wavelength': 'Optical',
+        'capabilities': ['Wide-field Imaging'],
+        'url': 'http://www.lco.cl/?epkb_post_type_1=megacam'},
+        {'name': 'MagAO',
+        'site_code': 'lco',
+        'tel_code': 'lco.magc',
+        'installation': 'Magellan-Clay',
+        'telescope': 'Magellan Telescope Clay',
+        'wavelength': 'Optical',
+        'capabilities': ['Adaptive Optics'],
+        'url': 'http://www.lco.cl/?epkb_post_type_1=magao'},
+
+        {'name': 'VATT4k',
+        'site_code': 'mgio',
+        'tel_code': 'mgio.vatt',
+        'installation': 'VATT',
+        'telescope': 'Vatican Advanced Technology Telescope',
+        'wavelength': 'Optical',
+        'capabilities': ['Imaging'],
+        'url': 'https://vaticanobservatory.org/VATT/the-telescope-instruments/vatt-instrumentation-and-computers'},
+        {'name': 'Galway Ultra Fast Imager (GUFI)',
+        'site_code': 'mgio',
+        'tel_code': 'mgio.vatt',
+        'installation': 'VATT',
+        'telescope': 'Vatican Advanced Technology Telescope',
+        'wavelength': 'Optical',
+        'capabilities': ['High-speed Imaging'],
+        'url': 'https://vaticanobservatory.org/VATT/the-telescope-instruments/vatt-instrumentation-and-computers'},
+        {'name': 'VATT Spectrograph (VATTSpec)',
+        'site_code': 'mgio',
+        'tel_code': 'mgio.vatt',
+        'installation': 'VATT',
+        'telescope': 'Vatican Advanced Technology Telescope',
+        'wavelength': 'Optical',
+        'capabilities': ['Spectroscopy'],
+        'url': 'https://vaticanobservatory.org/VATT/the-telescope-instruments/vatt-instrumentation-and-computers'},
         ]
 
     return instruments
