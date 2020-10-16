@@ -587,6 +587,30 @@ def fetch_observatory_sites():
           'site_code': 'mjuo',
           'url': 'https://www.canterbury.ac.nz/science/facilities/field-and-research-stations/mount-john-observatory/',
         },
+        { 'name': 'Mount Kent Observatory',
+          'location': 'Ground-based',
+          'latitude': '27:47:51.72S',
+          'longitude': '151:51:19.44E',
+          'altitude': 682.0,
+          'site_code': 'mkent',
+          'url': 'https://www.usq.edu.au/hes/school-of-sciences/mt-kent-observatory',
+        },
+        { 'name': 'Murchison Radio-astronomy Observatory',
+          'location': 'Ground-based',
+          'latitude': '26:42:12.0S',
+          'longitude': '116:40:16.0E',
+          'altitude': None,
+          'site_code': 'murch',
+          'url': 'https://en.wikipedia.org/wiki/Murchison_Radio-astronomy_Observatory',
+        },
+        { 'name': 'Station de Radioastronomie de Nancay',
+          'location': 'Ground-based',
+          'latitude': '47:22:50.0N',
+          'longitude': '02:11:42.0E',
+          'altitude': None,
+          'site_code': 'nancay',
+          'url': 'https://www.obs-nancay.fr/',
+        },
         ]
 
         for site in sites:
@@ -786,6 +810,7 @@ def fetch_installations():
     installations.append({'name': 'HAT-North', 'type': 'Dome', 'site_code': 'flwo'})
     installations.append({'name': 'MEarth', 'type': 'Dome', 'site_code': 'flwo'})
     installations.append({'name': 'VERITAS', 'type': 'Dome', 'site_code': 'flwo'})
+    installations.append({'name': 'MINERVA', 'type': 'Dome', 'site_code': 'flwo'})
 
     installations.append({'name': 'GEO600', 'type': 'Gravitational Wave Detector', 'site_code': 'sarstedt'})
     installations.append({'name': 'LIGO Livingston', 'type': 'Gravitational Wave Detector', 'site_code': 'livingston'})
@@ -903,6 +928,16 @@ def fetch_installations():
     installations.append({'name': 'Craftsmen', 'type': 'Dome', 'site_code': 'mjuo'})
     installations.append({'name': 'B&C', 'type': 'Dome', 'site_code': 'mjuo'})
     installations.append({'name': 'MOA', 'type': 'Dome', 'site_code': 'mjuo'})
+
+    installations.append({'name': 'MINERVA', 'type': 'Dome', 'site_code': 'mkent'})
+    installations.append({'name': 'UL0.5m', 'type': 'Dome', 'site_code': 'mkent'})
+    installations.append({'name': 'UL0.7m', 'type': 'Dome', 'site_code': 'mkent'})
+
+    installations.append({'name': 'ASKAP', 'type': 'Array', 'site_code': 'murch'})
+    installations.append({'name': 'MWA', 'type': 'Dish', 'site_code': 'murch'})
+    installations.append({'name': 'EDGES', 'type': 'Array', 'site_code': 'murch'})
+
+    installations.append({'name': 'Rdeci', 'type': 'Array', 'site_code': 'nancay'})
 
     return installations
 
@@ -1670,6 +1705,13 @@ def fetch_telescopes():
             'tel_code': 'flwo.1m2a',
             'url': 'http://www.sao.arizona.edu/FLWO/48/48.html',
             'operator': None},
+            {'name': 'MINERVA',
+            'aperture': 0.7,
+            'site_code': 'flwo',
+            'installation': 'MINERVA',
+            'tel_code': 'flwo.minvera',
+            'url': 'https://www.cfa.harvard.edu/minerva/',
+            'operator': None},
 
 
             {'name': 'Gemini South',
@@ -2382,6 +2424,78 @@ def fetch_telescopes():
             'installation': 'MOA',
             'tel_code': 'mjuo.moa',
             'url': 'https://www.canterbury.ac.nz/science/facilities/field-and-research-stations/mount-john-observatory/facilities/',
+            'operator': None},
+
+            {'name': 'MINERVA-Australis',
+            'aperture': 0.7,
+            'site_code': 'mkent',
+            'installation': 'MINERVA',
+            'tel_code': 'mkent.minerva',
+            'url': 'https://en.wikipedia.org/wiki/MINERVA-Australis',
+            'operator': None},
+            {'name': 'University of Louisville 0.5m',
+            'aperture': 0.5,
+            'site_code': 'mkent',
+            'installation': 'UL0.5m',
+            'tel_code': 'mkent.ul0m5a',
+            'url': 'https://www.astro.louisville.edu/mtkent/index.html',
+            'operator': None},
+            {'name': 'University of Louisville 0.7m',
+            'aperture': 0.7,
+            'site_code': 'mkent',
+            'installation': 'UL0.7m',
+            'tel_code': 'mkent.ul0m7a',
+            'url': 'https://www.astro.louisville.edu/mtkent/index.html',
+            'operator': None},
+
+            {'name': 'Australian Square Kilometre Array Pathfinder (ASKAP)',
+            'aperture': 12.0,
+            'site_code': 'murch',
+            'installation': 'ASKAP',
+            'tel_code': 'murch.askap',
+            'url': 'https://www.atnf.csiro.au/projects/askap/index.html',
+            'operator': None},
+            {'name': 'Murchison Widefield Array',
+            'aperture': None,
+            'site_code': 'murch',
+            'installation': 'MWA',
+            'tel_code': 'murch.mwa',
+            'url': 'https://www.mwatelescope.org/',
+            'operator': None},
+            {'name': 'Experiment to Detech the Global EoR Signature (EDGES)',
+            'aperture': None,
+            'site_code': 'murch',
+            'installation': 'EDGES',
+            'tel_code': 'murch.egdes',
+            'url': 'https://www.haystack.mit.edu/astronomy/astronomy-projects/edges-experiment-to-detect-the-global-eor-signature/',
+            'operator': None},
+            {'name': 'Radiotelescope decimetrique',
+            'aperture': None,
+            'site_code': 'nancay',
+            'installation': 'Rdeci',
+            'tel_code': 'nancay.rdeci',
+            'url': 'https://www.obs-nancay.fr/radiotelescope-decimetrique/',
+            'operator': None},
+            {'name': 'NenuFAR',
+            'aperture': None,
+            'site_code': 'nancay',
+            'installation': 'NenuFAR',
+            'tel_code': 'nancay.nenufar',
+            'url': 'https://www.obs-nancay.fr/nenufar/',
+            'operator': None},
+            {'name': 'Radioheliographe',
+            'aperture': None,
+            'site_code': 'nancay',
+            'installation': 'RH',
+            'tel_code': 'nancay.rh',
+            'url': 'https://www.obs-nancay.fr/radioheliographe/',
+            'operator': None},
+            {'name': 'Reseau Decametrique',
+            'aperture': None,
+            'site_code': 'nancay',
+            'installation': 'RD',
+            'tel_code': 'nancay.rh',
+            'url': 'https://www.obs-nancay.fr/reseau-decametrique/',
             'operator': None},
             ]
 
