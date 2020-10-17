@@ -43,6 +43,7 @@ class Installation(models.Model):
         ('Array', 'Array'),
         ('Gravitational Wave Detector', 'Gravitational Wave Detector'),
         ('Neutrino Detector', 'Neutrino Detector'),
+        ('Detector', 'Detector'),
         ('Spacecraft', 'Spacecraft'),
     )
     name = models.CharField("Installation Name", max_length=50)
@@ -85,7 +86,8 @@ class Instrument(models.Model):
           ('Gamma ray', 'Gamma ray'),
           ('X-ray', 'X-ray'),
           ('Gravitational waves', 'Gravitational waves'),
-          ('Neutrinos', 'Neutrinos')
+          ('Neutrinos', 'Neutrinos'),
+          ('Cosmic rays', 'Cosmic rays')
           )
 
     name = models.CharField("Instrument Name", max_length=50)

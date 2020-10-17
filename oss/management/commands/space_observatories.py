@@ -31,6 +31,18 @@ def fetch_space_sites():
           'site_code': 'iss',
           'url': 'https://www.nasa.gov/mission_pages/station/main/index.html',
         },
+        { 'name': 'Earth Sun-synchronous Orbit',
+          'location': 'Space',
+          'orbit': 'Earth Sun-synchronous Orbit',
+          'site_code': 'orb-earth-sunsync',
+          'url': None,
+        },
+        { 'name': 'Earth Sun-synchronous Polar Orbit',
+          'location': 'Space',
+          'orbit': 'Earth Sun-synchronous Polar Orbit',
+          'site_code': 'orb-earth-sunsync-polar',
+          'url': None,
+        },
         ]
 
     return sites
@@ -47,6 +59,10 @@ def fetch_space_installations():
     installations.append({'name': 'INTEGRAL', 'type': 'Spacecraft', 'site_code': 'orb-earth'})
     installations.append({'name': 'Insight-HXMT', 'type': 'Spacecraft', 'site_code': 'orb-earth'})
     installations.append({'name': 'MAXI', 'type': 'Spacecraft', 'site_code': 'iss'})
+    installations.append({'name': 'NEOSSat', 'type': 'Spacecraft', 'site_code': 'orb-earth-sunsync'})
+    installations.append({'name': 'NEOWISE', 'type': 'Spacecraft', 'site_code': 'orb-earth-sunsync-polar'})
+    installations.append({'name': 'NuSTAR', 'type': 'Spacecraft', 'site_code': 'orb-earth-sunsync-polar'})
+    installations.append({'name': 'ODIN', 'type': 'Spacecraft', 'site_code': 'orb-earth-sunsync'})
 
     return installations
 
@@ -103,6 +119,34 @@ def fetch_space_telescopes():
             'installation': 'MAXI',
             'tel_code': 'iss.maxi',
             'url': 'http://maxi.riken.jp/top/index.html',
+            'operator': None},
+            {'name': 'Near Earth Object Surveillance Satellite',
+            'aperture': None,
+            'site_code': 'orb-earth-sunsync',
+            'installation': 'NEOSSat',
+            'tel_code': 'iss.neossat',
+            'url': 'https://www.asc-csa.gc.ca/eng/satellites/neossat/default.asp',
+            'operator': None},
+            {'name': 'Near Earth Object Wide-field Infrared Survey Explorer (NEOWISE)',
+            'aperture': None,
+            'site_code': 'orb-earth-sunsync-polar',
+            'installation': 'NEOWISE',
+            'tel_code': 'orb-earth-sunsync-polar.neowise',
+            'url': 'https://www.jpl.nasa.gov/missions/neowise/',
+            'operator': None},
+            {'name': 'NuSTAR',
+            'aperture': None,
+            'site_code': 'orb-earth-low',
+            'installation': 'NuSTAR',
+            'tel_code': 'orb-earth-low.nustar',
+            'url': 'https://www.nustar.caltech.edu/',
+            'operator': None},
+            {'name': 'ODIN',
+            'aperture': 1.1,
+            'site_code': 'orb-earth-subsync',
+            'installation': 'ODIN',
+            'tel_code': 'orb-earth-sunsync.odin',
+            'url': 'https://www.rymdstyrelsen.se/en/swedish-satellites/odin-satellite/',
             'operator': None},
                 ]
 
@@ -258,13 +302,13 @@ def fetch_space_instruments():
             'capabilities': ['X-ray Detector'],
             'url': 'http://enghxmt.ihep.ac.cn/me.jhtml'},
             {'name': 'Low enery X-ray Telescope (LE)',
-            'site_code': 'orb-earth',
-            'tel_code': 'orb-earth.insight',
-            'installation': 'Insight',
-            'telescope': 'Insight Hard X-ray Modulation Telescope',
-            'wavelength': 'X-ray',
-            'capabilities': ['X-ray Detector'],
-            'url': 'http://enghxmt.ihep.ac.cn/le.jhtml'},
+            'site_code': 'orb-earth-sunsync',
+            'tel_code': 'orb-earth-sunsync.neossat',
+            'installation': 'NEOSSat',
+            'telescope': 'Near Earth Orbit Surveillance Satellite',
+            'wavelength': 'Optical',
+            'capabilities': ['Wide-field Imaging'],
+            'url': 'https://www.asc-csa.gc.ca/eng/satellites/neossat/default.asp'},
     ]
 
     return instruments
